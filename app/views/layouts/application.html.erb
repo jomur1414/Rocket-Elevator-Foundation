@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RocketElevatorsInformationSystem</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= yield :custom_style %>
+  </head>
+  	<body class="enable-animation">
+    
+
+		<!-- wrapper -->
+		<div id="wrapper">
+
+			<!-- 
+				AVAILABLE HEADER CLASSES
+
+				Default nav height: 96px
+				.header-md 		= 70px nav height
+				.header-sm 		= 60px nav height
+
+				.b-0 		= remove bottom border (only with transparent use)
+				.transparent	= transparent header
+				.translucent	= translucent header
+				.sticky			= sticky header
+				.static			= static header
+				.dark			= dark header
+				.bottom			= header on bottom
+				
+				shadow-before-1 = shadow 1 header top
+				shadow-after-1 	= shadow 1 header bottom
+				shadow-before-2 = shadow 2 header top
+				shadow-after-2 	= shadow 2 header bottom
+				shadow-before-3 = shadow 3 header top
+				shadow-after-3 	= shadow 3 header bottom
+
+				.clearfix		= required for mobile menu, do not remove!
+
+				Example Usage:  class="clearfix sticky header-sm transparent b-0"
+			-->
+			<div id="header" class="navbar-toggleable-md sticky header-md clearfix fixed">
+
+				<!-- TOP NAV -->
+				<header id="topNav">
+					<div class="container">
+
+						<!-- Mobile Menu Button -->
+						<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<!-- Logo -->
+						<a class="logo float-left scrollTo" href="#top">
+							<img src="/assets/header_logo.png" alt="Rocket Elevators Logo" />
+						</a>
+
+						<!-- 
+							Top Nav 
+							
+							AVAILABLE CLASSES:
+							submenu-dark = dark sub menu
+						-->
+						<div class="navbar-collapse collapse float-right nav-main-collapse submenu-dark">
+							<nav class="nav-main">
+
+								<!-- 
+									.nav-onepage
+									Required for onepage navigation links
+									
+									Add .external for an external link!
+								-->
+								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+									<li class="active"><!-- HOME -->
+										<a href="index">
+											HOME
+										</a>
+									</li>
+
+									<li class="dropdown"> <!-- SERVICES  - DROPDOWN MENU-->
+										<a class="dropdown-toggle" href="#services">
+											SERVICES
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="corporate.html">Commercial Services</a></li>
+											<li><a href="residential.html">Residential Services</a></li>
+										</ul>
+									</li>
+									<li><!-- portfolio -->
+										<a href="#portfolio">
+											PORTFOLIO
+										</a>
+									</li>
+									<li><!-- NEWS -->
+										<a href="#news">
+											NEWS
+										</a>
+									</li>
+									<li><!-- CLIENTS -->
+										<a href="#clients">
+											CLIENTS
+										</a>
+									</li>
+									<li><!-- CONTACT -->
+										<a href="#contact">
+											CONTACT
+										</a>
+									</li>
+										<li><!-- Interventions -->
+										<a href="#interventions">
+											INTERVENTIONS
+										</a>
+									</li>
+											</li>
+											<li><!-- Submission -->
+										<a href="submission.html">
+											SUBMISSION
+										</a>
+									</li>
+
+									<li>
+										<div class="container-fluid unconnected">
+											<div class="row">
+											<div class="row">
+
+
+
+<% if user_signed_in? && current_user.is_employee(current_user.email) %> 
+  <li>
+                                     <div class="w3-dropdown-hover">
+                                       <button class="w3-button w3-gray">PROFILE</button>
+                                            <div class="w3-dropdown-content w3-bar-block w3-border">
+                                                
+                                                    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %><br>
+                                                    <a href = "admin"> Aministration section<br>
+													 <a href = "blazer/dashboards/1-dashboard-query"> Dashboard employee<br>
+                                                    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>     
+                                
+                                                </div>
+                                            </div>
+                                          </div>
+                                    </li>    
+  </li>
+
+
+<% elsif user_signed_in?%> 
+
+  <li>
+                                     <div class="w3-dropdown-hover">
+                                       <button class="w3-button w3-gray">PROFILE</button>
+                                            <div class="w3-dropdown-content w3-bar-block w3-border">
+                                                
+                                                    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %><br>
+                                                    <a href = "dashboard.html"> Dashboard<br>
+                                                    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>     
+                                
+                                                </div>
+                                            </div>
+                                          </div>
+                                    </li>    
+  </li>
+
+
+
+
+
+<% else %>
+  <li>
+  <li>
+                                        <div class="w3-dropdown-hover">
+                                            <button class="w3-button w3-gray">SESSION</button>
+                                            <div class="w3-dropdown-content w3-bar-block w3-border">
+                                              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %><br>
+                                              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %><br>
+                                              
+                                            </div>
+                                          </div>
+                                    </li>
+
+
+  </li>
+<% end %>
+
+
+
+
+<li>							
+
+													</div>
+												  </div>
+
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</nav>
+						</div>
+
+					</div>
+				</header>
+				<!-- /Top Nav -->
+
+			</div>
+		
+<%# #######################	 %>
+       <%= yield %>
+<%# #######################	 %>
+<%= form_tag "/index", enctype: "multipart/form-data", method: 'post' do %>
+			<!-- CONTACT -->
+			<section id="contact">
+				<div class="container">
+					<div class="row">
+
+						<!-- FORM -->
+						<div class="col-md-8 col-sm-8">
+
+							<h3>Drop us a line or just say <strong><em>Hello!</em></strong></h3>
+
+							
+							<!--
+								MESSAGES
+								
+									How it works?
+									The form data is posted to php/contact.php where the fields are verified!
+									php.contact.php will redirect back here and will add a hash to the end of the URL:
+										#alert_success 		= email sent
+										#alert_failed		= email not sent - internal server error (404 error or SMTP problem)
+										#alert_mandatory	= email not sent - required fields empty
+										Hashes are handled by /assets/contact.js
+
+									Form data: required to be an array. Example:
+										contact[email][required]  WHERE: [email] = field name, [required] = only if this field is required (PHP will check this)
+										Also, add `required` to input fields if is a mandatory field. 
+										Example: <input required type="email" value="" class="form-control" name="contact[email][required]">
+
+									PLEASE NOTE: IF YOU WANT TO ADD OR REMOVE FIELDS (EXCEPT CAPTCHA), JUST EDIT THE HTML CODE, NO NEED TO EDIT php/contact.php or javascript
+												 ALL FIELDS ARE DETECTED DINAMICALY BY THE PHP
+
+									danger! Do not change the `email` and `name`!
+												contact[name][required] 	- should stay as it is because PHP is using it for AddReplyTo (phpmailer)
+												contact[email][required] 	- should stay as it is because PHP is using it for AddReplyTo (phpmailer)
+							-->
+
+							<!-- Alert Success -->
+							<div id="alert_success" class="alert alert-success mb-30">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>Thank You!</strong> Your message successfully sent!
+							</div><!-- /Alert Success -->
+
+
+							<!-- Alert Failed -->
+							<div id="alert_failed" class="alert alert-danger mb-30">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>[SMTP] Error!</strong> Internal server error!
+							</div><!-- /Alert Failed -->
+
+
+							<!-- Alert Mandatory -->
+							<div id="alert_mandatory" class="alert alert-danger mb-30">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>Sorry!</strong> You need to complete all mandatory (*) fields!
+							</div><!-- /Alert Mandatory -->
+
+
+							<form action="/index" method="post" >
+								<fieldset>
+									<input type="hidden" name="action" value="contact_send" />
+
+									<div class="row">
+											<div class="col-md-4">
+												<label for="contact:name">Full Name *</label>
+												<input required type="text" value="" class="form-control" name="contact_full_Name" id="contact:name">
+											</div>
+											<div class="col-md-4">
+												<label for="contact:email">E-mail Address *</label>
+												<input required type="email" value="" class="form-control" name="contact_email" id="contact:email">
+											</div>
+											<div class="col-md-4"> 
+												<label for="contact:phone">Phone</label>
+												<!--<input type="number" value="" class="form-control" name="contact[phone]" id="contact:phone"> -->
+												<input type="text"  value = "" class="form-control"  name="contact_phone" id="contact:phone">
+											</div>
+											
+									</div>
+									<div class="row">
+											
+											<div class="col-md-4">
+												<label for="contact_department">Department</label>
+												<select id ="contact_department"  name="contact_department">
+													<option value="">--- Select ---</option>
+													<option value="Commercial">Commercial</option>
+													<option value="Residential">Residential</option>
+													<option value="Corporate">Corporate</option>
+													<option value="Corporate">Hybrid</option>
+												</select>
+											</div>
+											<div class="col-md-8">
+												<label for="contact:business">Business Name *</label>
+												<input required type="text" value="" class="form-control " name="contact_business_name" id="contact:business">
+											</div>
+									</div>
+									<div class="row">
+											
+										<div class="col-md-4">
+											<label for="contact:phone">Project Name *</label>
+											<input required type="text" value="" class="form-control" name="contact_project_name" id="contact:project">
+										</div>
+										<div class="col-md-6">
+											<label for="contact:description">Project Description *</label>
+										<!--	<input required type="text" value="" class="form-control" name="contact[description][required]" id="contact:description"> -->
+										<textarea required maxlength="500" rows="3" class="form-control" name="contact_project_description" id="contact:description"></textarea>
+									</div>
+								</div>
+									<div class="row">
+											<div class="col-md-12">
+												<label for="contact:message">Message *</label>
+												<textarea required maxlength="10000" rows="8" class="form-control" name="contact_message" id="contact:message"></textarea>
+											</div>
+									</div>
+									<div class="row">
+											<div class="col-md-12">
+												<label for="contact:attachment">File Attachment</label>
+
+												<!-- custom file upload -->
+												<input class="custom-file-upload" type="file" name="attached_file" id="contact:attachment" data-btn-text="Select a File" />
+												<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+
+											</div>
+									</div>
+
+								</fieldset>
+
+								<div class="row">
+									<div class="col-md-12">
+										<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> SEND MESSAGE</button>
+									</div>
+								</div>
+							</form>
+
+						</div>
+						<%end%>
+						<!-- /FORM -->
+
+
+						<!-- INFO -->
+						<div class="col-md-4 col-sm-4">
+
+							<h2>Visit Us</h2>
+
+							<!-- 
+							Available heights
+								h-100
+								h-150
+								h-200
+								h-250
+								h-300
+								h-350
+								h-400
+								h-450
+								h-500
+								h-550
+								h-600
+							-->
+							<!--GOOGLE MAP  -->
+							<div class="mapouter"><div class="gmap_canvas"><iframe width="350" 
+								height="350" id="gmap_canvas" src="https://maps.google.com/maps?q=725%20boulevard%20lebourgneuf&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+								frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+								<style>.mapouter{position:relative;text-align:right;height:350;width:350px;}.gmap_canvas {overflow:hidden;background:none!important;height:350;width:350px;}</style></div>
+							<!--GOOGLE MAP  -->
+
+							<hr />
+
+							<p>
+								<span class="block"><strong><i class="fa fa-map-marker"></i> Address:</strong> 725 Boulevard Lebourgneuf, local 418, (Québec), QC G2J 0C4</span>
+								<span class="block"><strong><i class="fa fa-phone"></i> Phone:</strong> <a href="tel:581-701-0303">(581) 701-0303</a></span>
+								<span class="block"><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="mailto:mail@yourdomain.com">support@rocketelevators.com</a></span>
+							</p>
+
+						</div>
+						<!-- /INFO -->
+
+					</div>
+
+				</div>
+			</section>
+			<!-- /CONTACT -->
+
+
+
+
+			<!-- FOOTER -->
+			<footer id="footer">
+				<div class="container">
+
+
+					<div class="row">
+
+						<!-- col #1 -->
+						<div class="col-md-8">
+
+							<h3 class="letter-spacing-1">WHY US?</h3>
+
+							<!-- Small Description -->
+							<p>
+								Our mission rhythm with your satisfaction! 
+							</p>
+							<h2>(581) 701-0303</h2> <!-- Telephone number -->
+						</div>
+						<!-- /col #1 -->
+
+						<!-- col #2 -->
+						<div class="col-md-4">
+							<h3 class="letter-spacing-1">KEEP IN TOUCH</h3>
+
+							<!-- Newsletter Form -->
+							<p>Subscribe to Our Newsletter to get Important News & Offers</p>
+
+							<form class="validate" action="php/newsletter.php" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
+								<div class="input-group">
+									<input type="email" id="email" name="email" class="form-control required" placeholder="Enter your Email">
+									<span class="input-group-btn">
+										<button class="btn btn-danger" type="submit">Subscribe</button>
+									</span>
+								</div>
+							</form>
+							<!-- /Newsletter Form -->
+
+
+						</div>
+						<!-- /col #2 -->
+
+					</div>
+
+
+				</div>
+
+				<div class="copyright">
+					<div class="container">
+						<ul class="float-right m-0 list-inline mobile-block">
+							<li><a href="#">Terms &amp; Conditions</a></li>
+							<li>&bull;</li>
+							<li><a href="#">Privacy</a></li>
+						</ul>
+						&copy; All Rights Reserved, Company LTD
+					</div>
+				</div>
+
+			</footer>
+			<!-- /FOOTER -->
+
+		</div>
+		<!-- /wrapper -->
+
+
+		<!-- SCROLL TO TOP -->
+		<a href="#" id="toTop"></a>
+
+
+		<!-- PRELOADER -->
+		<div id="preloader">
+			<div class="inner">
+				<span class="loader"></span>
+			</div>
+		</div><!-- /PRELOADER -->
+
+
+
+
+
+        		<script>var plugin_path = '/assets/plugins/';</script> 
+             <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+
+   <!-- Sur branch test' %>-->
+<div><%= flash[:info] %></div>
+
+   
+    <% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+
+
+
+  </body>
+</html>

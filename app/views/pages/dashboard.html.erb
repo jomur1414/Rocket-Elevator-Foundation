@@ -1,0 +1,88 @@
+
+
+
+
+
+<div id="nav">
+	<div class="nav nav-tabs  lowerNav" id="nav-tab" role="tablist">
+    	<a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
+    	<a class="nav-item nav-link" id="nav-quotes-tab" data-toggle="tab" href="#nav-quotes" role="tab" aria-controls="nav-quotes" aria-selected="false">Quotes</a>
+	</div>
+</div>
+<div class="tab-content d-flex justify-content-center lowerNac_container" id="nav-tabContent">
+	<%# TAB ONE ####################################%>
+	<div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+		<% if user_signed_in? %>
+			<h1>Welcome <%= current_user.firstName %> </h1>
+		<div class="profile_container">
+			<img id="userAvatar" src="/assets/user.png" alt="" style="max-width: 10vh; max-height: 10vh;">
+			<p class="userInfos"><i class="fa fa-user" aria-hidden="true"></i><%= " " + current_user.firstName + " " +  current_user.lastName %></p> <br>
+			<p class="userInfos"><i class="fa fa-envelope" aria-hidden="true"></i><%= " " + current_user.email %></p> <br>
+			<p class="userInfos"><i class="fa fa-phone" aria-hidden="true"></i><%= " " + current_user.phoneNumber %></p> <br>
+			<p class="userInfos"><i class="fa fa-address-card" aria-hidden="true"></i><%= " " + current_user.job_title %></p> <br>
+		</div>
+			<div id="main">
+		    	<a href="/index">Return to the  main page</a>
+			</div>
+		<% else %>
+  			<li>
+  			<%= link_to('Login', new_user_session_path) %>  
+  			</li>
+		<% end %>
+	</div>
+	<%# TAB TWO ####################################%>
+  	<div class="tab-pane fade" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab">
+		<% @all_Quotes.each do |une_quote| %>
+  		<% if current_user.email == une_quote.email %>
+		<table class="table table-sm table-bordered table-condensed">
+		  <thead class="thead-dark">
+		    <tr>
+				<th scope="col">id</th>
+				<th scope="col"> First Name</th>
+				<th scope="col">Phone Number </th>
+				<th scope="col">Compangny name</th>
+				<th scope="col">email</th>
+				<th scope="col"> buildingType</th>
+				<th scope="col">nb Appartment </th>
+				<th scope="col">nb Business</th>
+				<th scope="col">nb Floor</th>
+				<th scope="col"> nb Basement</th>
+				<th scope="col">nbCage </th>
+				<th scope="col">nb Parking</th>
+				<th scope="col">nb OccupantFloor</th>
+				<th scope="col"> nb OperatingHours</th>
+				<th scope="col">nb ElevatorNeeded </th>
+				<th scope="col">instllation Cost</th>
+				<th scope="col">total Cost </th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+				<th scope="row"> <%=une_quote.id %></th>
+				<td><%=une_quote.firstName %></td>
+				<td><%=une_quote.phoneNumber %></td>
+				<td><%=une_quote.companyName %></td>
+				<td><%=une_quote.email %></td>
+				<td><%=une_quote.buildingType %></td>
+				<td><%=une_quote.nbAppartment %></td>
+				<td><%=une_quote.nbBusiness %></td>
+				<td><%=une_quote.nbFloor %></td>
+				<td><%=une_quote.nbBasement %></td>
+				<td><%=une_quote.nbCage %></td>
+				<td><%=une_quote.nbParking %></td>
+				<td><%=une_quote.nbOccupantFloor %></td>
+				<td><%=une_quote.nbOperatingHours %></td>
+				<td><%=une_quote.nbElevatorNeeded %></td>
+				<td><%=une_quote.instllationCost %></td>
+				<td><%=une_quote.totalCost %></td>
+		    </tr>
+		  </tbody>
+		</table>
+		<%end%>      
+		<%end%>
+  	</div>
+</div>
+
+<!--*******************************************************************************************************************************************************************************************************************************************
+	*******************************************************************************************************************************************************************************************************************************************-->
+=

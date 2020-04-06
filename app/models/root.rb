@@ -1,0 +1,3 @@
+class Root < ApplicationRecord
+
+end

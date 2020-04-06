@@ -1,0 +1,115 @@
+body {
+    background-color: #2f2f2f;
+}
+select {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 200px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: bold;
+    font-size: 15px;
+    margin: 1vh;
+    margin-top:2vh;
+    padding: 5px;
+}
+
+option {
+   color: black;
+   background-color: rgba(255, 255, 255, 0.6);
+}
+
+#specification {
+    width: 300px;
+    display: block;
+}
+
+.form_input {
+background-color: rgba(255, 255, 255, 0.6);
+color:white;
+font-size: 15px;;
+margin: 5px;
+width: 350px;
+padding: 5px;
+border:none;
+border-radius: 10px;
+display:none;
+}
+
+.form_input::placeholder {
+    color:white;
+    font-size: 15px;;
+    font-weight: bold;
+
+    }
+
+
+.resultbox {
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    width: 200px;
+    height: 34px;
+    padding: 5px;
+    margin: 5vh;
+    border: white;
+    border-radius: 10px;
+}
+
+.basicInfos {
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    width: 200px;
+    height: 34px;
+    padding: 5px;
+    margin: 5vh;
+    border: white;
+    border-radius: 10px;
+}
+
+.basicInfos::placeholder {
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+}
+
+#formbackground {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.formStyle {
+    background-color:rgba(0, 0, 0, 0.70);
+    color:rgb(255, 255, 255);
+    font-weight: bolder;
+    font-size: 1.5vh;
+    height:auto;
+    width: auto;
+}
+
+.radioButton{
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.departmentSelector {
+    width: 300px;
+    margin: 5vh;
+    padding: 5vh;
+}
+
+#rates {
+    margin: 3vh;
+}
+
+.addTo{
+    padding:3vh;
+}
+
+.alert {
+    margin: 5vh;
+    opacity: .8;
+}

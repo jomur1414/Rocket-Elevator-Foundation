@@ -1,0 +1,140 @@
+
+			<div id="header" class="navbar-toggleable-md sticky header-md clearfix">
+
+				<!-- TOP NAV -->
+				<header id="topNav">
+					<div class="container">
+
+						<!-- Mobile Menu Button -->
+						<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<!-- Logo -->
+						<a class="logo float-left scrollTo" href="#top">
+							<img src="/assets/header_logo.png" alt="Rocket Elevators Logo" />
+						</a>
+
+						<!-- 
+							Top Nav 
+							
+							AVAILABLE CLASSES:
+							submenu-dark = dark sub menu
+						-->
+						<div class="navbar-collapse collapse float-right nav-main-collapse submenu-dark">
+							<nav class="nav-main">
+
+								<!-- 
+									.nav-onepage
+									Required for onepage navigation links
+									
+									Add .external for an external link!
+								-->
+								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+									<li class="active"><!-- HOME -->
+										<a href="#home">
+											HOME
+										</a>
+									</li>
+
+									<li class="dropdown"> <!-- SERVICES  - DROPDOWN MENU-->
+										<a class="dropdown-toggle" href="#services">
+											SERVICES
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="corporate.html">Commercial Services</a></li>
+											<li><a href="residential.html">Residential Services</a></li>
+										</ul>
+									</li>
+									<li><!-- portfolio -->
+										<a href="#portfolio">
+											PORTFOLIO
+										</a>
+									</li>
+									<li><!-- NEWS -->
+										<a href="#news">
+											NEWS
+										</a>
+									</li>
+									<li><!-- CLIENTS -->
+										<a href="#clients">
+											CLIENTS
+										</a>
+									</li>
+									<li><!-- CONTACT -->
+										<a href="#contact">
+											CONTACT
+										</a>
+									</li>
+											</li>
+											<li><!-- Submission -->
+										<a href="submission.html">
+											SUBMISSION
+										</a>
+									</li>
+
+									<li>
+										<div class="container-fluid unconnected">
+											<div class="row">
+											<div class="row">
+<% if user_signed_in? %>
+  <li>
+                                     <div class="w3-dropdown-hover" >
+                                       <button class="w3-button w3-gray">PROFILE</button>
+                                            <div class="w3-dropdown-content w3-bar-block w3-border">
+                                                
+                                                    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %><br>
+                                                    <a href = "dashboard.html"> Dashboard<br>
+                                                    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>     
+                                
+                                                </div>
+                                            </div>
+                                          </div>
+                                    </li>    
+  </li>
+<% else %>
+  <li>
+  <li>
+                                        <div class="w3-dropdown-hover">
+                                            <button class="w3-button w3-gray">SESSION</button>
+                                            <div class="w3-dropdown-content w3-bar-block w3-border">
+                                              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %><br>
+                                              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %><br>
+                                              
+                                            </div>
+                                          </div>
+                                    </li>
+
+
+  </li>
+<% end %>
+
+
+
+<li>
+													</div>
+												  </div>
+
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</nav>
+						</div>
+
+					</div>
+				</header>
+				<!-- /Top Nav -->
+
+			</div>
+			
+
+<!--*******************************************************************************************************************************************************************************************************************************************
+******************************************************************************************************************************************************************************************************************************************* -->
+
+
+
+
+<!--*******************************************************************************************************************************************************************************************************************************************
+	*******************************************************************************************************************************************************************************************************************************************-->
