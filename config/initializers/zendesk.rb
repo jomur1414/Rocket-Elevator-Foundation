@@ -3,13 +3,13 @@ require "zendesk_api"
     client = ZendeskAPI::Client.new do |config|
       # Mandatory:
 
-      config.url = "https://kienzan.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
+      config.url = "https://zendeskmurrayjonathan.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
 
       # Basic / Token Authentication
       config.username = "support@kienzan.zendesk.com"
 
       # Choose one of the following depending on your authentication choice
-      config.token = "Zendesk_Token"
+      config.token = "zendesk_token_foundation"
       # config.password = "your zendesk password"
 
       # OAuth Authentication

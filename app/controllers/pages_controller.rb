@@ -3,16 +3,12 @@ class PagesController < ApplicationController
   require 'send_grid_mailer/custom_send_api'
 
 
+
   before_action :authenticate_user!, only: [:dashboard]
-
   after_action :sendEmail, :function_send_ticket, only: [:create]
-
-
   
-
   def index
   end
-
 
   def create
 
@@ -78,11 +74,11 @@ end
   def function_send_ticket
       
     @client = ZendeskAPI::Client.new do |config|
-      config.url = "https://supportRocket.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
+      config.url = "https://zendeskmurrayjonathan.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
       # Basic / Token Authentication
-      config.username = "marc_travail@hotmail.com"
+      config.username = "jonathanmurray1@msn.com"
       # config.token = "Zendesk_Token"
-      config.token = ENV["Zendesk_Token"]
+      config.token = ENV["zendesk_token_foundation"]
     end
 
     ZendeskAPI::Ticket.create!(@client,

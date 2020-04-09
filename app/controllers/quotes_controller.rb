@@ -2,6 +2,7 @@ class QuotesController < ApplicationController
   def submission
   end
   def create
+    
     #Quote.create(params)
     @quote = Quote.new
     @quote = Quote.create(

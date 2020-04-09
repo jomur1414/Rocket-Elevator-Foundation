@@ -1,0 +1,240 @@
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<div class="row" style="height: 30vh">
+</div>
+
+<div class="tab-content" id="submission-tabContent">
+
+    <section id="intervention">
+        
+        <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: blue">Interventions</h2>
+            </div>
+        </div>
+
+<div class="container">
+    <div class="row" style="height: 40vh">
+  
+
+    			<div class="col-md-12 mx-auto text-center text-blue offset-md-3">
+            	<%= form_with model: @customer do|form| %>
+	
+      
+                <label class="col-md-12 mx-auto text-center text-blue offset-md-3 name=intervention[author_id]"> Customer </label>
+                <%= form.select(:customer, Customer.all.collect {|c| [c.contact_full_name, c.id]}, {prompt: "Select"}, {class: 'form-control required'}) %>
+
+                <div class="affiche_building">
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Building</label>
+                </div>
+                </div>
+     
+
+                <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[building_id]"> </label>
+                <%= form.select(:building, Building.all.collect {|b| [b.id, b.customer_id]},  {prompt: "Select Building"}, {class: 'form-control'}) %>
+
+
+
+                <div class="affiche_battery">
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Battery</label>
+                </div>
+                </div>
+           
+                <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[battery_id]"> </label>
+                <%= form.select(:battery, Battery.all.collect {|b| [b.id, b.building_id]},  {prompt: "Select Battery"}, {class: 'form-control'}) %>   
+
+
+                <div class="affiche_column">
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Column</label>
+                </div>
+                </div>
+
+           
+                <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[column_id]"> </label>
+                <%= form.select(:column, Column.all.collect {|c| [c.id, c.battery_id]},  {prompt: "Select Column"}, {class: 'form-control'}) %> 
+
+                <div class="affiche_evel">
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Elevator</label>
+                </div>
+                </div>
+                <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[elevator_id]"> </label>
+                <%= form.select(:elevator, Elevator.all.collect {|e| [e.id, e.column_id]},  {prompt: "None"}, {class: 'form-control'}) %>    
+
+                <div class="affiche_employee">
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Select Employee</label>
+                </div>
+                </div>
+                <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[employee_id]">  </label>
+                <%= form.select(:employee, Employee.all.collect {|e| [e.lastName, e.id]},  {prompt: "None"}, {class: 'form-control'}) %>  
+
+            
+                <label class="col-md-12 d-flex justify-content-center" for="interventionDescription"> Description </label>
+
+                <textarea class="form-control" id="interventionDescription" rows="3" name="report"></textarea>
+
+                <button id="buttonSubmitIntervention" type="submit" class="btn btn-success col-md-12 d-flex justify-content-center">Submit</button>    
+              
+        
+      <% end %>
+        </div>
+		  </div>
+		    </div>
+    </div>
+</div>
+
+
+<script>
+console.log("jquery")
+    
+    $(document).ready(function(){
+        $(".affiche_building").hide();
+        $(".affiche_evel").hide();
+        $(".affiche_battery").hide();
+        $(".affiche_column").hide();
+        $("#building").hide()
+        $("#battery").hide()
+        $("#column").hide()
+        $("#elevator").hide()
+        $("#contact").hide()
+        $("#footer").hide()
+    })
+
+
+    $("#building").prop("disabled", true); 
+    
+    $("#customer").change(function(){
+        var customer = $(this).val();
+        if(customer == ''){
+            $("#building").prop("disabled", true);
+        }else{
+            $("#building").show()
+            $("#building").prop("disabled", false);
+        }
+      $(".affiche_building").show();
+        $.ajax({
+            url: "/interventions/building",
+            method: "GET",  
+            dataType: "json",
+            data: {customer: customer},
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ' + status + error);
+            },
+            success: function (response) {
+                console.log(response);
+                var building = response["building"];
+                $("#building").empty();
+
+                $("#building").append('<option> Select Building </option>');
+                for(var i = 0; i < building.length; i++){
+                    $("#building").append('<option value="' + building[i]["id"] + '">' + building[i]["id"] + ". " + building[i]["building_administrator_full_name"] + '</option>');
+                }
+            }
+        });
+    });
+
+
+    $("#battery").prop("disabled", true); 
+    $("#building").change(function(){
+        var building = $(this).val();
+        if(building == ''){
+            $("#battery").prop("disabled", true);
+        }else{
+            $("#battery").show()
+            $("#battery").prop("disabled", false);
+          }
+       $(".affiche_battery").show();
+        $.ajax({
+            url: "/interventions/battery",
+            method: "GET",  
+            dataType: "json",
+            data: {building: building},
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ' + status + error);
+            },
+            success: function (response) {
+                console.log(response);
+                var battery = response["battery"];
+                $("#battery").empty();
+
+                $("#battery").append('<option> Select Battery </option>');
+                for(var i = 0; i < battery.length; i++){
+                    $("#battery").append('<option value="' + battery[i]["id"] + '">' + battery[i]["id"] + '</option>');
+                }
+            }
+        });
+    });
+
+  
+    $("#column").prop("disabled", true); 
+    $("#battery").change(function(){
+        var battery = $(this).val();
+        if(battery == ''){
+            $("#column").prop("disabled", true);
+        }else{
+            $("#column").show()
+            $("#column").prop("disabled", false);
+        }
+        $(".affiche_column").show();
+    
+        $.ajax({
+            url: "/interventions/column",
+            method: "GET",  
+            dataType: "json",
+            data: {battery: battery},
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ' + status + error);
+            },
+            success: function (response) {
+                console.log(response);
+                var column = response["column"];
+                $("#column").empty();
+
+                $("#column").append('<option> None </option>');
+                for(var i = 0; i < column.length; i++){
+                    $("#column").append('<option value="' + column[i]["id"] + '">' + column[i]["id"] + '</option>');
+                }
+            }
+        });
+    });
+
+   
+    $("#elevator").prop("disabled", true); // fifth dropdown is disable while fourth dropdown is empty
+
+    $("#column").change(function(){
+        var column = $(this).val();
+        if(column == ''){
+            $("#elevator").prop("disabled", true);
+        }else{
+            $("#elevator").show()
+            $("#elevator").prop("disabled", false);
+        }
+        $(".affiche_evel").show();
+        $.ajax({
+            url: "/interventions/elevator",
+            method: "GET",  
+            dataType: "json",
+            data: {column: column},
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ' + status + error);
+            },
+            success: function (response) {
+                console.log(response);
+                var elevator = response["elevator"];
+                $("#elevator").empty();
+
+                $("#elevator").append('<option> None </option>');
+                for(var i = 0; i < column.length; i++){
+
+                    $("#elevator").append('<option value="' + elevator[i]["id"] + '">' + elevator[i]["id"] + '</option>');
+
+                }
+            }
+        });
+    });
+
+
+
+
+
+
+</script>

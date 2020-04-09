@@ -18,17 +18,16 @@ Rails.application.routes.draw do
 
   delete 'index' => 'pages#destroy'
 
-
   post 'root' => 'root#sendInformation'
 
-
   post 'index' => 'pages#create'
-
+  
   post 'index' => 'pages#create'
   mount Blazer::Engine, at: "blazer"
 
   get 'home' => 'pages#home'
-
+ 
+  #get 'newintervention' => 'interventions#newintervention'
 
   get 'corporate'  => 'pages#corporate'
 
@@ -38,11 +37,9 @@ Rails.application.routes.draw do
 
   post 'submission' => 'quotes#create'
 
-
   get 'employee' => 'pages#employee'
 
   get 'submission' => 'pages#submission'
-
   
   get 'index' => 'pages#index'
 
@@ -54,6 +51,15 @@ Rails.application.routes.draw do
   
   get 'dashboard' => 'pages#dashboard'
 
+  #post '/interventions' => 'interventions#create_intervention'
+
+  post 'interventions' => 'interventions#create'
+  get 'interventions' => 'interventions#interventions'
+
+  get 'interventions/building' => 'interventions#building'
+  get 'interventions/battery' => 'interventions#battery'
+  get 'interventions/column' => 'interventions#column'
+  get 'interventions/elevator' => 'interventions#elevator'
 
   resources :geolocations
 

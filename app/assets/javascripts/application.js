@@ -11,7 +11,7 @@
 // about supported directives.
 //
 
-
+//= require jquery
 //= require ./plugins/jquery/jquery-3.2.1.min
 
 
@@ -23,5 +23,6 @@
 //= require view/demo.revolution_slider.js
 
 //= require contact
+
 
 
