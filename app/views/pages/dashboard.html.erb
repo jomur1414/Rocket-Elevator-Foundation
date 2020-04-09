@@ -1,7 +1,5 @@
 
-
-
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <div id="nav">
 	<div class="nav nav-tabs  lowerNav" id="nav-tab" role="tablist">
@@ -12,26 +10,20 @@
 <div class="tab-content d-flex justify-content-center lowerNac_container" id="nav-tabContent">
 	<%# TAB ONE ####################################%>
 	<div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-		<% if user_signed_in? %>
+
 			<h1>Welcome <%= current_user.firstName %> </h1>
 		<div class="profile_container">
 			<img id="userAvatar" src="/assets/user.png" alt="" style="max-width: 10vh; max-height: 10vh;">
-			<p class="userInfos"><i class="fa fa-user" aria-hidden="true"></i><%= " " + current_user.firstName + " " +  current_user.lastName %></p> <br>
+			<p class="userInfos" ><i class="fa fa-user" aria-hidden="true"></i><%= " " + current_user.firstName + " " +  current_user.lastName %></p> <br>
 			<p class="userInfos"><i class="fa fa-envelope" aria-hidden="true"></i><%= " " + current_user.email %></p> <br>
 			<p class="userInfos"><i class="fa fa-phone" aria-hidden="true"></i><%= " " + current_user.phoneNumber %></p> <br>
-			<p class="userInfos"><i class="fa fa-address-card" aria-hidden="true"></i><%= " " + current_user.job_title %></p> <br>
+			<p class="userInfos"><i class="fa fa-address-card" aria-hidden="true"></i><%= " " + current_user.job_title  %></p> <br>
+
 		</div>
-			<div id="main">
-		    	<a href="/index">Return to the  main page</a>
-			</div>
-		<% else %>
-  			<li>
-  			<%= link_to('Login', new_user_session_path) %>  
-  			</li>
-		<% end %>
-	</div>
-	<%# TAB TWO ####################################%>
-  	<div class="tab-pane fade" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab">
+
+	
+
+  	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
 		<% @all_Quotes.each do |une_quote| %>
   		<% if current_user.email == une_quote.email %>
 		<table class="table table-sm table-bordered table-condensed">
@@ -81,8 +73,87 @@
 		<%end%>      
 		<%end%>
   	</div>
+
+
+<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
+			<% @all_customer.each do |customer| %>
+  	
+  		<% if current_user.email == customer.email %>
+			
+
+							<p class="userInfos"><i class="fa fa-phone" aria-hidden="true"></i><%= " " + current_user.email %></p> <br>
 </div>
+		<%end%>
+					<%end%>
+<div class="container">
+    <div class="row" style="height: 40vh">
+  
+
+    			<div class="col-md-12 mx-auto text-center text-blue offset-md-3">
+            	<%= form_with model: @customer do|form| %>
+	
+      
+                <label class="col-md-12 mx-auto text-center text-blue offset-md-3 "name=intervention[author_id]"> Customer </label>
+
+                <%= form.select(:customer, Customer.all.collect {|c| [c.contact_full_name, c.id]}, {prompt: "Select"}, {class: 'form-control required'}) %>
+
+                <div class="affiche_building">
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Building</label>
+                </div>
+                </div>
+     
+
+                <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[building_id]"> </label>
+                <%= form.select(:building, Building.all.collect {|b| [b.id, b.customer_id]},  {prompt: "Select Building"}, {class: 'form-control'}) %>
+
+
+      <% end %>		<%end%>
+		
+
+
+		
+			<div id="main">
+		    	<a href="/index" class="text-primary">Return to the  main page</a>
+			</div>
+
+	</div>
+	</div>
 
 <!--*******************************************************************************************************************************************************************************************************************************************
 	*******************************************************************************************************************************************************************************************************************************************-->
-=
+<script>
+
+    $("#building").prop("disabled", true); 
+    
+    $("#customer").change(function(){
+        var customer = $(this).val();
+        if(customer == ''){
+            $("#building").prop("disabled", true);
+        }else{
+            $("#building").show()
+            $("#building").prop("disabled", false);
+        }
+      $(".affiche_building").show();
+        $.ajax({
+            url: "/interventions/building",
+            method: "GET",  
+            dataType: "json",
+            data: {customer: customer},
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ' + status + error);
+            },
+            success: function (response) {
+                console.log(response);
+                var building = response["building"];
+                $("#building").empty();
+
+                $("#building").append('<option> Select Building </option>');
+                for(var i = 0; i < building.length; i++){
+                    $("#building").append('<option value="' + building[i]["id"] + '">' + building[i]["id"] + ". " + building[i]["building_administrator_full_name"] + '</option>');
+                }
+            }
+        });
+    });
+
+
+</script>

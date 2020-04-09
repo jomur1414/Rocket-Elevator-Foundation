@@ -25,11 +25,11 @@ class QuotesController < ApplicationController
       totalCost: params[:total_cost],
     )
     @client = ZendeskAPI::Client.new do |config|
-      config.url = "https://supportRocket.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
+      config.url = "https://zendeskmurrayjonathan.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
       # Basic / Token Authentication
-      config.username = "marc_travail@hotmail.com"
+      config.username = "jonathanmurray1@msn.com"
       # config.token = "Zendesk_Token"
-      config.token = ENV["Zendesk_Token"]
+      config.token = ENV["zendesk_token_foundation"]
     end
     ZendeskAPI::Ticket.create!(@client,
       :subject => "#{@quote.firstName} from #{@quote.companyName}",

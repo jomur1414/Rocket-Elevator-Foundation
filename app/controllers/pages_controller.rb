@@ -10,6 +10,7 @@ class PagesController < ApplicationController
   def index
   end
 
+  
   def create
 
     file_attachment = params[:attached_file]
@@ -50,26 +51,34 @@ def sendEmail
 end
 
 
-
 def home
    
 end
-    # def admin
-    #   @all_Quotes = Quote.all
 
-    # if @current_user.try(:title) != "employee"
-    #   flash[:error] = "ACCES DENIED"
-    #   return redirect_to request.referrer || "/home"
-    # end
-  #   @users = User.all
-  # end
 
     def dashboard
       @all_Quotes = Quote.all
-
+      @all_customer = Customer.all
     end
 
-end
+
+
+    def building
+      if params[:customer].present?
+          @building = Building.where(customer_id:params[:customer])
+      else
+          @building = Building.all
+      end
+
+      respond_to do |format|
+          format.json {
+              render json: {building: @building}
+          }
+      end
+  end
+
+
+
 
   def function_send_ticket
       
@@ -90,3 +99,4 @@ end
       :priority => "urgent")
   end
 
+end
