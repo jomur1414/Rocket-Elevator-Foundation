@@ -1,7 +1,6 @@
 class InterventionsController < ApplicationController
 
 
-
     def building
         if params[:customer].present?
             @building = Building.where(customer_id:params[:customer])
@@ -59,7 +58,7 @@ class InterventionsController < ApplicationController
     end
 
 
-#to author_id use current_user_id
+#to author_id use current_user_id ?
 
     def create
         @current_user_id = current_user.id
