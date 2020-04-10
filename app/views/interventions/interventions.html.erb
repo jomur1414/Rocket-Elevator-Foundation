@@ -21,8 +21,10 @@
             	<%= form_with model: @customer do|form| %>
 	
       
+
                 <label class="col-md-12 mx-auto text-center text-blue offset-md-3 name=intervention[author_id]"> Customer </label>
                 <%= form.select(:customer, Customer.all.collect {|c| [c.contact_full_name, c.id]}, {prompt: "Select"}, {class: 'form-control', required: true}) %>
+
 
                 <div class="affiche_building">
                 <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Building</label>
