@@ -69,6 +69,7 @@ end
       @all_column = Column.all
       @all_elevator = Elevator.all
       @all_lead = Lead.all
+      @all_intervention = Intervention.all
     end
 
 
