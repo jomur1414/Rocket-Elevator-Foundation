@@ -27,7 +27,7 @@
 
 
                 <div class="affiche_building">
-                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Building</label>
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Select Building</label>
                 </div>
                 </div>
      
@@ -38,7 +38,7 @@
 
 
                 <div class="affiche_battery">
-                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Battery</label>
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Select Battery</label>
                 </div>
                 </div>
            
@@ -47,7 +47,7 @@
 
 
                 <div class="affiche_column">
-                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Column</label>
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Select Column</label>
                 </div>
                 </div>
 
@@ -56,7 +56,7 @@
                 <%= form.select(:column, Column.all.collect {|c| [c.id, c.battery_id]},  {prompt: "Select Column"}, {class: 'form-control'}) %> 
 
                 <div class="affiche_evel">
-                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Elevator</label>
+                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Select Elevator</label>
                 </div>
                 </div>
                 <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[elevator_id]"> </label>
