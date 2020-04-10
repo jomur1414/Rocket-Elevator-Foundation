@@ -70,6 +70,10 @@ class InterventionsController < ApplicationController
         if params[:elevator] == "None"
             params[:elevator] = nil
          end
+         
+         if params[:employee] == "None"
+            params[:employee] = nil
+         end
         
             @intervention = Intervention.new
 
