@@ -17,11 +17,15 @@
 			<p class="userInfos" ><i class="fa fa-user" aria-hidden="true"></i><%= " " + current_user.firstName + " " +  current_user.lastName %></p> <br>
 			<p class="userInfos"><i class="fa fa-envelope" aria-hidden="true"></i><%= " " + current_user.email %></p> <br>
 			<p class="userInfos"><i class="fa fa-phone" aria-hidden="true"></i><%= " " + current_user.phoneNumber %></p> <br>
-			<p class="userInfos"><i class="fa fa-address-card" aria-hidden="true"></i><%= " " + current_user.job_title  %></p> <br>
+
 
 		</div>
 
-	
+	     <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: black">Quotes</h2>
+            </div>
+        </div>
 
   	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
 		<% @all_Quotes.each do |une_quote| %>
@@ -75,85 +79,172 @@
   	</div>
 
 
-<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
-			<% @all_customer.each do |customer| %>
-  	
-  		<% if current_user.email == customer.email %>
-			
+<%@quote = 0%>
 
-							<p class="userInfos"><i class="fa fa-phone" aria-hidden="true"></i><%= " " + current_user.email %></p> <br>
+	<% @all_Quotes.each do |quote| %>
+		<% if current_user.email == quote.email %>
+		<%@quote = @quote + 1%>
+		
+<%end%>
+<%end%>
+<div class="profile_container">
+You made a total of : <%=@quote %> Quotes
 </div>
-		<%end%>
-					<%end%>
-<div class="container">
-    <div class="row" style="height: 40vh">
-  
 
-    			<div class="col-md-12 mx-auto text-center text-blue offset-md-3">
-            	<%= form_with model: @customer do|form| %>
+<div class="row" style="height: 10vh">
+</div>
+
+
+	<%@building = 0%>
+	<%@baterry = 0%>
+	<%@column = 0%>
+	<%@elevator = 0%>
+
+
+	     <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: black">Summarize the number of items</h2>
+            </div>
+        </div>
+
+
+  	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
+
+
+		<% @all_customer.each do |customer| %>
+   		<% if current_user.email == customer.contact_email %>
+
+		<% @all_buidling.each do |building| %>
+		<% if customer.id == building.customer_id %>
+		<%@building = @building + 1%>
+		
+
+		<% @all_battery.each do |battery| %>
+		<% if building.id == battery.building_id %>
+		<%@baterry = @baterry + 1%>
+
+
+		<% @all_column.each do |column| %>
+		<% if battery.id == column.battery_id %>
+		<%@column = @column + 1%>
+
+
+		<% @all_elevator.each do |elevator| %>
+		<% if column.id == elevator.column_id %>
+		<%@elevator = @elevator + 1%>
 	
-      
-                <label class="col-md-12 mx-auto text-center text-blue offset-md-3 "name=intervention[author_id]"> Customer </label>
 
-                <%= form.select(:customer, Customer.all.collect {|c| [c.contact_full_name, c.id]}, {prompt: "Select"}, {class: 'form-control required'}) %>
+		<%end%>      
+		<%end%>
+				<%end%>      
+		<%end%>
+				<%end%>      
+		<%end%>
+				<%end%>      
+		<%end%>
 
-                <div class="affiche_building">
-                <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Building</label>
-                </div>
-                </div>
-     
+		<table class="table table-sm table-bordered table-condensed">
+		  <thead class="thead-dark">
+		    <tr>
+				<th scope="col">Building</th>
+				<th scope="col">Batteries </th>
+				<th scope="col">Columns</th>
+				<th scope="col">Elevator</th>
 
-                <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[building_id]"> </label>
-                <%= form.select(:building, Building.all.collect {|b| [b.id, b.customer_id]},  {prompt: "Select Building"}, {class: 'form-control'}) %>
-
-
-      <% end %>		<%end%>
 		
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+				<th scope="row"> <%= @building %></th>
+				<td><%=@baterry %></td>
+				<td>	<%=@column %></td>
+				<td>	<%=@elevator %></td>
+			
+		    </tr>
+		  </tbody>
+		</table>
+		<%end%>      
+		<%end%>
+  	</div>
 
 
+<div class="row" style="height: 10vh">
+</div>
+
+	     <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: black">Lead</h2>
+            </div>
+        </div>
+
+  	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
+		<% @all_lead.each do |lead| %>
+  		<% if current_user.email == lead.email %>
+		<table class="table table-sm table-bordered table-condensed">
+		  <thead class="thead-dark">
+		    <tr>
+				<th scope="col">id</th>
+				<th scope="col"> Full name</th>
+			    <th scope="col">email</th>
+				<th scope="col">Phone Number </th>
+				<th scope="col"> Department</th>
+				<th scope="col">Business name</th>
+				<th scope="col">Project name </th>
+				<th scope="col">Project description</th>
+				<th scope="col">Message</th>
 		
-			<div id="main">
-		    	<a href="/index" class="text-primary">Return to the  main page</a>
-			</div>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+				<th scope="row"> <%=lead.id %></th>
+				<td><%=lead.full_name %></td>
+				<td><%=lead.email %></td>
+				<td><%=lead.phone %></td>
+				<td><%=lead.department %></td>
+				<td><%=lead.business_name %></td>
+				<td><%=lead.project_name %></td>
+				<td><%=lead.project_description %></td>
+				<td><%=lead.message %></td>
+		    </tr>
+		  </tbody>
+		</table>
+		<%end%>      
+		<%end%>
+  	</div>
+
+
+<%@lead = 0%>
+
+	<% @all_lead.each do |lead| %>
+		<% if current_user.email == lead.email %>
+		<%@lead = @lead + 1%>
+		
+<%end%>
+<%end%>
+<div class="profile_container">
+You made a total of : <%=@lead %> Leads
+
+</div>
+
+
+
+
 
 	</div>
+	<div class="row" style="height: 30vh">
+</div>
 	</div>
 
 <!--*******************************************************************************************************************************************************************************************************************************************
 	*******************************************************************************************************************************************************************************************************************************************-->
+
+
+
 <script>
-
-    $("#building").prop("disabled", true); 
-    
-    $("#customer").change(function(){
-        var customer = $(this).val();
-        if(customer == ''){
-            $("#building").prop("disabled", true);
-        }else{
-            $("#building").show()
-            $("#building").prop("disabled", false);
-        }
-      $(".affiche_building").show();
-        $.ajax({
-            url: "/interventions/building",
-            method: "GET",  
-            dataType: "json",
-            data: {customer: customer},
-            error: function (xhr, status, error) {
-                console.error('AJAX Error: ' + status + error);
-            },
-            success: function (response) {
-                console.log(response);
-                var building = response["building"];
-                $("#building").empty();
-
-                $("#building").append('<option> Select Building </option>');
-                for(var i = 0; i < building.length; i++){
-                    $("#building").append('<option value="' + building[i]["id"] + '">' + building[i]["id"] + ". " + building[i]["building_administrator_full_name"] + '</option>');
-                }
-            }
-        });
-    });
-
+ 
+  
+	
 
 </script>

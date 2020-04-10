@@ -57,15 +57,28 @@ end
 
 
     def dashboard
+  
+
+     @bat =  Battery.sum(:id)
+     #Item.group(:Battery).sum(:id)
+
       @all_Quotes = Quote.all
       @all_customer = Customer.all
+      @all_buidling = Building.all
+      @all_battery = Battery.all
+      @all_column = Column.all
+      @all_elevator = Elevator.all
+      @all_lead = Lead.all
     end
 
 
 
     def building
-      if params[:customer].present?
-          @building = Building.where(customer_id:params[:customer])
+
+puts("dabs byuldinbg")
+
+      if params[:customerName].present?
+          @building = Building.where(customer_id:params[:customerName])
       else
           @building = Building.all
       end

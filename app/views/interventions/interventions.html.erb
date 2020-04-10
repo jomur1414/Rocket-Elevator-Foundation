@@ -22,7 +22,7 @@
 	
       
                 <label class="col-md-12 mx-auto text-center text-blue offset-md-3 name=intervention[author_id]"> Customer </label>
-                <%= form.select(:customer, Customer.all.collect {|c| [c.contact_full_name, c.id]}, {prompt: "Select"}, {class: 'form-control required'}) %>
+                <%= form.select(:customer, Customer.all.collect {|c| [c.contact_full_name, c.id]}, {prompt: "Select"}, {class: 'form-control', required: true}) %>
 
                 <div class="affiche_building">
                 <div class="col-md-12 mx-auto text-center text-blue offset-md-3"> Selet Building</label>
@@ -31,7 +31,7 @@
      
 
                 <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[building_id]"> </label>
-                <%= form.select(:building, Building.all.collect {|b| [b.id, b.customer_id]},  {prompt: "Select Building"}, {class: 'form-control'}) %>
+                <%= form.select(:building, Building.all.collect {|b| [b.id, b.customer_id]},  {prompt: "Select Building"}, {class: 'form-control', required: true}) %>
 
 
 
@@ -41,7 +41,7 @@
                 </div>
            
                 <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[battery_id]"> </label>
-                <%= form.select(:battery, Battery.all.collect {|b| [b.id, b.building_id]},  {prompt: "Select Battery"}, {class: 'form-control'}) %>   
+                <%= form.select(:battery, Battery.all.collect {|b| [b.id, b.building_id]},  {prompt: "Select Battery"}, {class: 'form-control', required: true}) %>   
 
 
                 <div class="affiche_column">
@@ -65,7 +65,7 @@
                 </div>
                 </div>
                 <label class="col-md-12 mx-auto text-center text-blue offset-md-3" name="intervention[employee_id]">  </label>
-                <%= form.select(:employee, Employee.all.collect {|e| [e.lastName, e.id]},  {prompt: "None"}, {class: 'form-control'}) %>  
+                <%= form.select(:employee, Employee.all.collect {|e| [e.lastName, e.id]},  {prompt: "None"}, {class: 'form-control', required: true}) %>  
 
             
                 <label class="col-md-12 d-flex justify-content-center" for="interventionDescription"> Description </label>
@@ -95,8 +95,7 @@ console.log("jquery")
         $("#battery").hide()
         $("#column").hide()
         $("#elevator").hide()
-        $("#contact").hide()
-        $("#footer").hide()
+
     })
 
 
@@ -198,8 +197,7 @@ console.log("jquery")
     });
 
    
-    $("#elevator").prop("disabled", true); // fifth dropdown is disable while fourth dropdown is empty
-
+    $("#elevator").prop("disabled", true); 
     $("#column").change(function(){
         var column = $(this).val();
         if(column == ''){
