@@ -51,6 +51,10 @@ Rails.application.routes.draw do
   
   get 'dashboard' => 'pages#dashboard'
 
+
+
+  get 'dashboard/building' => 'dashboard#building'
+
   #post '/interventions' => 'interventions#create_intervention'
 
   post 'interventions' => 'interventions#create'

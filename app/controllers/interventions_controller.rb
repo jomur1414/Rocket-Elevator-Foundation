@@ -82,10 +82,8 @@ class InterventionsController < ApplicationController
                 elevator_id: params[:elevator],
                 employee_id: params[:employee],
                 report: params[:report]
-
-                
-                
             )
+            
             redirect_to "/interventions"
 
     zendesk();

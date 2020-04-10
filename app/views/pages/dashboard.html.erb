@@ -1,7 +1,5 @@
 
-
-
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <div id="nav">
 	<div class="nav nav-tabs  lowerNav" id="nav-tab" role="tablist">
@@ -12,26 +10,24 @@
 <div class="tab-content d-flex justify-content-center lowerNac_container" id="nav-tabContent">
 	<%# TAB ONE ####################################%>
 	<div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-		<% if user_signed_in? %>
+
 			<h1>Welcome <%= current_user.firstName %> </h1>
 		<div class="profile_container">
 			<img id="userAvatar" src="/assets/user.png" alt="" style="max-width: 10vh; max-height: 10vh;">
-			<p class="userInfos"><i class="fa fa-user" aria-hidden="true"></i><%= " " + current_user.firstName + " " +  current_user.lastName %></p> <br>
+			<p class="userInfos" ><i class="fa fa-user" aria-hidden="true"></i><%= " " + current_user.firstName + " " +  current_user.lastName %></p> <br>
 			<p class="userInfos"><i class="fa fa-envelope" aria-hidden="true"></i><%= " " + current_user.email %></p> <br>
 			<p class="userInfos"><i class="fa fa-phone" aria-hidden="true"></i><%= " " + current_user.phoneNumber %></p> <br>
-			<p class="userInfos"><i class="fa fa-address-card" aria-hidden="true"></i><%= " " + current_user.job_title %></p> <br>
+
+
 		</div>
-			<div id="main">
-		    	<a href="/index">Return to the  main page</a>
-			</div>
-		<% else %>
-  			<li>
-  			<%= link_to('Login', new_user_session_path) %>  
-  			</li>
-		<% end %>
-	</div>
-	<%# TAB TWO ####################################%>
-  	<div class="tab-pane fade" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab">
+
+	     <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: black">Quotes</h2>
+            </div>
+        </div>
+
+  	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
 		<% @all_Quotes.each do |une_quote| %>
   		<% if current_user.email == une_quote.email %>
 		<table class="table table-sm table-bordered table-condensed">
@@ -81,8 +77,174 @@
 		<%end%>      
 		<%end%>
   	</div>
+
+
+<%@quote = 0%>
+
+	<% @all_Quotes.each do |quote| %>
+		<% if current_user.email == quote.email %>
+		<%@quote = @quote + 1%>
+		
+<%end%>
+<%end%>
+<div class="profile_container">
+You made a total of : <%=@quote %> Quotes
 </div>
+
+<div class="row" style="height: 10vh">
+</div>
+
+
+	<%@building = 0%>
+	<%@baterry = 0%>
+	<%@column = 0%>
+	<%@elevator = 0%>
+
+
+	     <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: black">Summarize the number of items</h2>
+            </div>
+        </div>
+
+
+  	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
+
+
+		<% @all_customer.each do |customer| %>
+   		<% if current_user.email == customer.contact_email %>
+
+		<% @all_buidling.each do |building| %>
+		<% if customer.id == building.customer_id %>
+		<%@building = @building + 1%>
+		
+
+		<% @all_battery.each do |battery| %>
+		<% if building.id == battery.building_id %>
+		<%@baterry = @baterry + 1%>
+
+
+		<% @all_column.each do |column| %>
+		<% if battery.id == column.battery_id %>
+		<%@column = @column + 1%>
+
+
+		<% @all_elevator.each do |elevator| %>
+		<% if column.id == elevator.column_id %>
+		<%@elevator = @elevator + 1%>
+	
+
+		<%end%>      
+		<%end%>
+				<%end%>      
+		<%end%>
+				<%end%>      
+		<%end%>
+				<%end%>      
+		<%end%>
+
+		<table class="table table-sm table-bordered table-condensed">
+		  <thead class="thead-dark">
+		    <tr>
+				<th scope="col">Building</th>
+				<th scope="col">Batteries </th>
+				<th scope="col">Columns</th>
+				<th scope="col">Elevator</th>
+
+		
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+				<th scope="row"> <%= @building %></th>
+				<td><%=@baterry %></td>
+				<td>	<%=@column %></td>
+				<td>	<%=@elevator %></td>
+			
+		    </tr>
+		  </tbody>
+		</table>
+		<%end%>      
+		<%end%>
+  	</div>
+
+
+<div class="row" style="height: 10vh">
+</div>
+
+	     <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: black">Lead</h2>
+            </div>
+        </div>
+
+  	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
+		<% @all_lead.each do |lead| %>
+  		<% if current_user.email == lead.email %>
+		<table class="table table-sm table-bordered table-condensed">
+		  <thead class="thead-dark">
+		    <tr>
+				<th scope="col">id</th>
+				<th scope="col"> Full name</th>
+			    <th scope="col">email</th>
+				<th scope="col">Phone Number </th>
+				<th scope="col"> Department</th>
+				<th scope="col">Business name</th>
+				<th scope="col">Project name </th>
+				<th scope="col">Project description</th>
+				<th scope="col">Message</th>
+		
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+				<th scope="row"> <%=lead.id %></th>
+				<td><%=lead.full_name %></td>
+				<td><%=lead.email %></td>
+				<td><%=lead.phone %></td>
+				<td><%=lead.department %></td>
+				<td><%=lead.business_name %></td>
+				<td><%=lead.project_name %></td>
+				<td><%=lead.project_description %></td>
+				<td><%=lead.message %></td>
+		    </tr>
+		  </tbody>
+		</table>
+		<%end%>      
+		<%end%>
+  	</div>
+
+
+<%@lead = 0%>
+
+	<% @all_lead.each do |lead| %>
+		<% if current_user.email == lead.email %>
+		<%@lead = @lead + 1%>
+		
+<%end%>
+<%end%>
+<div class="profile_container">
+You made a total of : <%=@lead %> Leads
+
+</div>
+
+
+
+
+
+	</div>
+	<div class="row" style="height: 30vh">
+</div>
+	</div>
 
 <!--*******************************************************************************************************************************************************************************************************************************************
 	*******************************************************************************************************************************************************************************************************************************************-->
-=
+
+
+
+<script>
+ 
+  
+	
+
+</script>

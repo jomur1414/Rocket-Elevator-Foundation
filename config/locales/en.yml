@@ -29,7 +29,10 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-admin:
+en:
+  admin:
     actions:
-      Foo:
-        menu: 'Foo'
+      root: 
+        title: 'IBM Watson'
+        menu: 'IBM Watson'
+        breadcrumb: 'IBM Watson Text to speech'
