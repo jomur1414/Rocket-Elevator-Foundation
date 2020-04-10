@@ -228,6 +228,67 @@ You made a total of : <%=@lead %> Leads
 
 </div>
 
+<div class="row" style="height: 10vh">
+</div>
+
+	     <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: black">Interventions</h2>
+            </div>
+        </div>
+
+  	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
+
+		<% @all_customer.each do |customer| %>
+		<% if (customer.id == current_user.id )%>
+
+		<% @all_intervention.each do |intervention| %>
+  		<% if (intervention.customer_id == customer.id)%>
+
+		<table class="table table-sm table-bordered table-condensed">
+		  <thead class="thead-dark">
+		    <tr>
+				<th scope="col">id</th>
+				<th scope="col"> Author id</th>
+			    <th scope="col">Customer email</th>
+				<th scope="col">Building id </th>
+				<th scope="col">Battery id </th>
+				<th scope="col">Building id </th>	
+				<th scope="col">Column id </th>	
+				<th scope="col">Elevator id </th>	
+				<th scope="col">Employee id </th>
+				<th scope="col">Intervention start time </th>	
+				<th scope="col">Intervention_end_time </th>	
+				<th scope="col">Result </th>	
+				<th scope="col">Report </th>	
+				<th scope="col">Status </th>	
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+				<th scope="row"> <%=intervention.id %></th>
+				<td><%=intervention.author_id %></td>
+				<td><%=intervention.customer_id %></td>
+				<td><%=intervention.building_id %></td>
+				<td><%=intervention.battery_id %></td>
+				<td><%=intervention.column_id %></td>
+				<td><%=intervention.elevator_id %></td>
+				<td><%=intervention.employee_id %></td>
+				<td><%=intervention.intervention_start_time %></td>
+				<td><%=intervention.intervention_end_time %></td>
+				<td><%=intervention.result %></td>
+				<td><%=intervention.report %></td>
+				<td><%=intervention.status %></td>
+
+
+		    </tr>
+		  </tbody>
+		</table>
+		<%end%>      
+		<%end%>
+				<%end%>
+					<%end%>
+  	</div>
 
 
 
