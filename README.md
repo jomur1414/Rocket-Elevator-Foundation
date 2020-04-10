@@ -14,8 +14,9 @@ adam@example.net   // 123456
 
 
 Extra-miles :
-with user account (use adam@exemple.net to try) and go to the dashboard section, you will see all the informations about the quotes you have made previously,
-a summary of all possessions for the customer (number of building, battery, column and elevator) and also the leads made previously by the customer
+with user account (use adam@exemple.net to try) and go to the dashboard section, you will see all the informations about the quotes the client have made previously,
+a summary of all possessions for the customer (number of building, battery, column and elevator), the leads made previously by the customer
+and also all the interventions where the client is involved
 ----------------------------------------------------------------
 
 

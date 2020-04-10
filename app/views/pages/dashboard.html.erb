@@ -240,10 +240,13 @@ You made a total of : <%=@lead %> Leads
   	<div class="text-primary" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab"  >
 
 		<% @all_customer.each do |customer| %>
-		<% if (customer.id == current_user.id )%>
+		<% if (customer.user_id == current_user.id )%>
+
 
 		<% @all_intervention.each do |intervention| %>
-  		<% if (intervention.customer_id == customer.id)%>
+  		<% if ( intervention.customer_id == customer.id )%>
+
+
 
 		<table class="table table-sm table-bordered table-condensed">
 		  <thead class="thead-dark">
@@ -252,8 +255,7 @@ You made a total of : <%=@lead %> Leads
 				<th scope="col"> Author id</th>
 			    <th scope="col">Customer email</th>
 				<th scope="col">Building id </th>
-				<th scope="col">Battery id </th>
-				<th scope="col">Building id </th>	
+				<th scope="col">Battery id </th>	
 				<th scope="col">Column id </th>	
 				<th scope="col">Elevator id </th>	
 				<th scope="col">Employee id </th>
