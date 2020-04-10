@@ -20,9 +20,8 @@ and also all the interventions where the client is involved
 ----------------------------------------------------------------
 
 
-The add an internvention, log with USER & EMPLOYEE. You will see Interventions in button section near CONTACT
+To add an intervention, log with an USER & EMPLOYEE account. You will see Interventions in button section near CONTACTS
 (You can do it on cell phone also)
-
 
 
 RESTapi foundation repo : https://github.com/jomur1414/RestApiFoundation
