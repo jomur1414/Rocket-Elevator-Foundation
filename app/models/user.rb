@@ -1,13 +1,14 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  
+  devise :zxcvbnable
   
   has_one :employee
-  
+
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :timeoutable
+
 
   def is_employee(email)
  
@@ -24,13 +25,6 @@ class User < ActiveRecord::Base
     return false
     
   end
-
-
-  #  @employee.each do |employee| 
-
-  #   if current_user.id == employee.if 
-
-  #   return true
 
     
 end

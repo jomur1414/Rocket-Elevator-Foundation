@@ -95,13 +95,13 @@ gem "capistrano-bundler", ">= 1.1.0"
 gem "rvm1-capistrano3", require: false
 gem "capistrano3-puma"
 
-
+gem 'devise_zxcvbn'
 
 gem 'sendgrid-ruby' 
 
 gem 'sinatra'
 gem 'twilio-ruby'
-
+gem "brakeman"
 
 gem 'ibm_watson', git: 'https://github.com/watson-developer-cloud/ruby-sdk', branch: 'master'
 gem 'dropbox_api'

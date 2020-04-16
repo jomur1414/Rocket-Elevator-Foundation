@@ -1,6 +1,8 @@
 class InterventionsController < ApplicationController
 
 
+    protect_from_forgery with: :exception
+
     def building
         if params[:customer].present?
             @building = Building.where(customer_id:params[:customer])
@@ -98,9 +100,9 @@ def zendesk()
 
     @nameauthor = current_user.firstName
     @client = ZendeskAPI::Client.new do |config|
-    config.url = "https://zendeskmurrayjonathan.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
+    config.url = ENV['zendeskurl'] # e.g. https://mydesk.zendesk.com/api/v2
     # Basic / Token Authentication
-    config.username = "jonathanmurray1@msn.com"
+    config.username = ENV['zendesk_email']
     # config.token = "Zendesk_Token"
     config.token = ENV["zendesk_token_foundation"]
   end
