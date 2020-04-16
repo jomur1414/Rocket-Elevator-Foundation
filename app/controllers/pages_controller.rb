@@ -7,9 +7,13 @@ class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:dashboard]
   after_action :sendEmail, :function_send_ticket, only: [:create]
   
+  protect_from_forgery with: :exception
+
+  
   def index
   end
 
+  
   
   def create
 
@@ -35,6 +39,9 @@ class PagesController < ApplicationController
   end
 
 
+
+
+  
 def sendEmail
 
   sendgrid = SendGridApi::CustomSendGrid.new
@@ -58,7 +65,6 @@ end
 
     def dashboard
   
-
      @bat =  Battery.sum(:id)
      #Item.group(:Battery).sum(:id)
 
@@ -97,9 +103,9 @@ puts("dabs byuldinbg")
   def function_send_ticket
       
     @client = ZendeskAPI::Client.new do |config|
-      config.url = "https://zendeskmurrayjonathan.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
+      config.url = ENV['zendeskurl'] # e.g. https://mydesk.zendesk.com/api/v2
       # Basic / Token Authentication
-      config.username = "jonathanmurray1@msn.com"
+      config.username = ENV['zendesk_email']
       # config.token = "Zendesk_Token"
       config.token = ENV["zendesk_token_foundation"]
     end
