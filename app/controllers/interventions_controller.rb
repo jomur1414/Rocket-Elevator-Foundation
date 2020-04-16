@@ -5,8 +5,8 @@ class InterventionsController < ApplicationController
 
     def building
         if params[:customer].present?
-            @building = Building.where(customer_id:params[:customer])
-        else
+            @building = Building.where("customer_id = '#{params[:customer]}'")
+        else        
             @building = Building.all
         end
 
@@ -19,7 +19,7 @@ class InterventionsController < ApplicationController
 
     def battery
         if params[:building].present?
-            @battery = Battery.where(building_id:params[:building])
+            @battery = Battery.where("building_id = '#{params[:building]}'")
         else
             @battery = Battery.all
         end
@@ -33,7 +33,7 @@ class InterventionsController < ApplicationController
 
     def column
         if params[:battery].present?
-            @column = Column.where(battery_id:params[:battery])
+            @column = Column.where("battery_id = '#{params[:battery]}'")
         else
             @column = Column.all
         end
@@ -47,7 +47,7 @@ class InterventionsController < ApplicationController
 
     def elevator
         if params[:column].present?
-            @elevator = Elevator.where(column_id:params[:column])
+            @elevator = Elevator.where("column_id = '#{params[:column]}'")
         else
             @elevator = Elevator.all
         end
