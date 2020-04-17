@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
       # depending on your auth, something like...
       redirect_to main_app.root_path unless current_user.is_employee(current_user.email)
     end
+
   
 
     protect_from_forgery with: :exception
