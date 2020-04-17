@@ -1,5 +1,6 @@
 
 class RootController < ApplicationController
+protect_from_forgery with: :exception
 
 
 require 'watson/watson_api'

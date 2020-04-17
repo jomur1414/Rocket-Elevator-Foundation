@@ -1,5 +1,6 @@
 class GeolocationsController < ApplicationController
   before_action :set_geolocation, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :exception
 
   # GET /geolocations
   # GET /geolocations.json
