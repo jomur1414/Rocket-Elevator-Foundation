@@ -4,7 +4,8 @@
  require 'spec_helper'
  require 'httparty'
  require 'net/http'
- require "rails_helper"
+
+
 
 
  describe ElevatorMedia do
@@ -169,30 +170,16 @@
     #     end
     # end
 
-#     RSpec.describe QuotesController do
-#         it 'should put all the quotes' do
 
-#             get :index
 
-#             Quote.create(Full_Name: 'QuotesName')
-#             expect(assigns[:quotes]).not_to be_nil
-#         end
-    
-#         it 'should look if size eq 1' do
-#             get :index
-#         Quote.create(Full_Name: 'QuotesName')
-#         expect(assigns[:quotes].size).to eq(1)
-#         end
+
+#     RSpec.describe InterventionsController, type: :model do
+#         context 'validation tests' do
+#           it 'ensures first name presence' do
+#             user = User.new(last_name: 'Last', email: 'sample@example.com').save
+#             expect(user).to eq(false)
+#           end
 #     end
-
 # end
 
-RSpec.describe QuotesController, type: :controller do
-    describe "GET index"
-      it "returns a 200" do
-        request.headers["Authorization"] = "foo"
-        get :index
-        expect(response).to have_http_status(:ok)
-      end
-    end
 
