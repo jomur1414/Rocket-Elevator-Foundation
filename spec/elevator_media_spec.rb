@@ -95,7 +95,7 @@ end
     end
 
 
-    describe "The Chuck Nerris API" do
+    describe "The Chuck Norris API" do
         it "the method sould receive the url of the api, from this url a JSON, the JSON should not be null and it should content the FAKE_CONTENT_CHUCK" do
         plain_json = double("plain_json")    
             expect(Net::HTTP).to receive(:get).with(URI("http://api.icndb.com/jokes/random")) {plain_json}    
@@ -128,35 +128,37 @@ end
                 get :submission
                 expect(response.status).to eq(200)
             end
-        end
+    end
     end
 
 
     RSpec.describe PagesController, type: :controller do
         context 'validation test for User' do
-            it 'ensures first name presence' do
+            
+            it 'ensures first name presence only = false' do
               user = User.new(lastName: 'Jonathan').save
               expect(user).to eq(false)
             end
     
-            it 'ensures last name presence' do
+            it 'ensures last name presence = false' do
               user = User.new(lastName: 'Murray').save
               expect(user).to eq(false)
             end
     
-            it 'ensures email presence' do
-              user = User.new(lastName: 'Murray').save
+            it 'ensures email presence = false' do
+              user = User.new(email: 'jonathanmurray1@msn.com').save
               expect(user).to eq(false)
             end
     
-            it 'should save successfully' do 
+            it 'should save successfully = false' do 
               user = User.new(firstName: 'Jonathan', lastName: 'Murray', email: 'jonathanmurray1@msn.com').save
               expect(user).to eq(false)
             end
         end
 
-        context 'validation tests for Lead' do
+        
 
+        context 'validation tests for Lead' do
             it "get index pages and return a successful response" do
                 get :index
                 expect(response).to be_successful
@@ -167,42 +169,60 @@ end
                 expect(response.status).to eq(200)
             end
 
-            it 'test the full_name param' do
+            it "Controller test for Lead" do
+                params  =  {
+                    :full_name=> "Jo",
+                    :business_name=> "Murray",
+                    :email=> "jonat@hotmail.com",
+                    :phone=> "555-223-2323",
+                    :project_name=> "Alpha",
+                    :project_description=> "Big house",
+                    :department=> "Residential",
+                    :message=> "test",
+                    :file_attachment=> "Hello",
+                    :file_name=> "World",
+                    }
+                    post(:create, params: params)
+                    expect(response.code).to eq "302"
+                end
+    
+
+            it 'test the full_name param in model' do
                 lead = Lead.new(full_name: 'Jo').save
                 expect(lead).to eq(true)
             end
 
-            it 'test the business_name param' do
+            it 'test the business_name param in model' do
                 lead = Lead.new(business_name: 'CodeBoxx').save
                 expect(lead).to eq(true)
             end
 
-            it 'test the email param' do
+            it 'test the email param in model' do
                 lead = Lead.new(email: 'jonathanmurray1@msn.com').save
                 expect(lead).to eq(true)
             end
 
-            it 'test the phone param' do
+            it 'test the phone param in model' do
                 lead = Lead.new(phone: '555-555-5555').save
                 expect(lead).to eq(true)
             end
 
-            it 'test the project_name param' do
+            it 'test the project_name param in model' do
                 lead = Lead.new(project_name: 'Alpha').save
                 expect(lead).to eq(true)
             end
 
-            it 'test the project_description param' do
+            it 'test the project_description paramin model' do
                 lead = Lead.new(project_description: 'Delta').save
                 expect(lead).to eq(true)
             end
 
-            it 'test the department param' do
+            it 'test the department paramin model' do
                 lead = Lead.new(department: 'Residential').save
                 expect(lead).to eq(true)
             end
 
-            it 'test the message param' do
+            it 'test the message param in model' do
                 lead = Lead.new(message: 'message').save
                 expect(lead).to eq(true)
             end
@@ -212,15 +232,7 @@ end
 
 
     RSpec.describe InterventionsController, type: :controller do
-
-        # context "Intervention is correctly filed and saved" do
-        #     it "redirects_to index" do
-        #         get :create 
-        #         expect(subject).to redirects_to(assigns(:index))
-        #         expect(reponse).to have_http_status(:ok)
-        #     end
-        # end
-
+    
         context 'validation tests for Intervention' do
 
             it "get intervention and return a successful response" do
@@ -232,8 +244,25 @@ end
                 get :interventions
                     expect(response.status).to eq(200)
             end
+
+            it "Controller test for the method create" do
+            params  =  {
+                :author_id=> 4,
+                :customer_id=> 2,
+                :building_id=> 2,
+                :battery_id=> 4,
+                :column_id=> 2,
+                :elevator_id=> 2,
+                :employee_id=> 2,
+                :report=> "test",
+                }
+                post(:create, params: params)
+                expect(response.code).to eq "302"
+            end
+
+         
         end
-            context 'validation tests for DB Intervention' do
+            context 'validation tests for DB Intervention in model' do
 
             it "send a customer_id to the building method and return succesful" do
                 building = Building.new(customer_id: 2)
@@ -242,66 +271,65 @@ end
             end
 
 
-            it "send a customer_id to the building method and return succesful" do
+            it "send a customer_id to the building method and return succesful in model" do
                 buildingObject = Battery.new(building_id: 5).save
                     expect(response).to be_successful
                     expect(response.status).to eq(200)
             end
             
 
-            it "send a customer_id to the building method and return succesful" do
+            it "send a customer_id to the building method and return succesful in model" do
                 building = Column.new(battery_id: 5).save
                     expect(response).to be_successful
                     expect(response.status).to eq(200)
             end
             
 
-            it "send a customer_id to the building method and return succesful" do
+            it "send a customer_id to the building method and return succesful in model" do
                 building = Elevator.new(column_id: 6).save
                     expect(response).to be_successful
                     expect(response.status).to eq(200)
             end
 
-            it 'should return an error (false) some params are not entered' do
+            it 'should return an error (false) some params are not entered in model' do
                 intervention = Intervention.new(author_id: 1, customer_id: 2).save
                     expect(intervention).to eq(false)
             end
 
-            it 'should return an error (false) if the parameter customer_id is not entered' do
+            it 'should return an error (false) if the parameter customer_id is not entered in model' do
                 intervention = Intervention.new(author_id: 1, building_id: 4, battery_id: 10, 
                 column_id: 5, elevator_id: 40, employee_id: 5, report: "This is report"  ).save
                     expect(intervention).to eq(false)
             end
 
-            it 'should return good (true) without emplotee_id param' do
+            it 'should return good (true) without employee_id param in model' do
                 intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
                 column_id: 5, elevator_id: 40, report: "This is report"  ).save
                     expect(intervention).to eq(true)
             end
             
-            it 'should return good (true) even without elevator_id, column_id and battery_id ' do
+            it 'should return good (true) even without elevator_id, column_id and battery_id in model ' do
                 intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10,
                 employee_id: 5, report: "This is report").save
                     expect(intervention).to eq(true)
             end
             
-            it 'should return good (true) even witouh elevator_id and column_id' do
+            it 'should return good (true) even witouh elevator_id and column_id in model' do
                 intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
                 employee_id: 5, report: "This is report").save
                     expect(intervention).to eq(true)
             end
 
-            it 'should return good (true) even witouh elevator_id and column_id and employee_id' do
+            it 'should return good (true) even witouh elevator_id and column_id and employee_id in model' do
                 intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
                 report: "This is report").save
                     expect(intervention).to eq(true)
             end
 
-            it 'should return good (true) if ALL params are there' do
+            it 'should return good (true) if ALL params are there in model' do
                 intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
                 column_id: 5, elevator_id: 40, employee_id: 5, report: "This is report"  ).save
                     expect(intervention).to eq(true)
-                  #  expect(intervention).to have_attributes(:author_id => 1)
             end
         end
     end
@@ -347,19 +375,6 @@ end
             it "routes to get dashboard" do
             expect(get: "dashboard").to route_to("pages#dashboard")
             end
-
-  
     end
-
-    
-    #   RSpec.describe "AdminPanel", :type => :feature do
-    #     context "Go to admin panel" do
-    #         it "Lets me go" do
-    #             visit 'users/sign_in'
-    #             fill_in "Email", with: 'nimportequellemail@hotmail.com'
-    #             fill_in "Password", with: '123456'
-    #          end
-    #      end
-    #  end
 
 

@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
 
   before_action :authenticate_user!, only: [:dashboard]
-  after_action :sendEmail, :function_send_ticket, only: [:create]
+ # after_action :sendEmail, :function_send_ticket, only: [:create]
   
   protect_from_forgery with: :exception
 
