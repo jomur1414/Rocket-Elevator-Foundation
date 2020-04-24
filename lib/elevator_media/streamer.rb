@@ -10,7 +10,6 @@ require 'net/http'
 
     def self.getContent(city_id, content_type, idSuperHero)
 
-
         weather = self.weatherCity(city_id)
 
         chuck = self.chuckNorris()
@@ -57,11 +56,9 @@ require 'net/http'
 
     # 876428adbfcd109c539080c03f050b28
     def self.weatherCity(city_id)
-
         options = { units: "metric", APPID: ENV['weather_api']}
         city = (OpenWeather::Current.city_id(city_id, options))
         return city
-
     end
 
 
@@ -69,25 +66,14 @@ require 'net/http'
 
         uritest =  Net::HTTP.get(URI('http://api.icndb.com/jokes/random'))
         obj_chuck = JSON.parse(uritest)
-
-        # url = URI.parse('http://api.icndb.com/jokes/random')
-        # req = Net::HTTP::Get.new(url.to_s)
-        # res = Net::HTTP.start(url.host, url.port) {|http| http.request(req) }
-   
-        # res.body
-
-        # obj = JSON.parse(res.body)
-    
         return obj_chuck        
     end
 
     def self.superHero(id)
-
         # id = 10.to_s
         uritest =  Net::HTTP.get(URI("https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/#{id}.json"))
         obj_hero = JSON.parse(uritest)
         return obj_hero
-
     end
 
 

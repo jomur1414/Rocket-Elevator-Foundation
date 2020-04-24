@@ -1,11 +1,11 @@
 class InterventionsController < ApplicationController
 
 
-    before_action :require_admin, only: :interventions
+   # before_action :require_admin, only: :interventions
     
-    before_action :authenticate_user!, only: [:interventions]
+   # before_action :authenticate_user!, only: [:interventions]
 
-    protect_from_forgery with: :exception
+   # protect_from_forgery with: :exception
 
 
     def interventions

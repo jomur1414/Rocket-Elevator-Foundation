@@ -12,14 +12,36 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 #
-
 # require 'webmock/rspec'
 # WebMock.disable_net_connect!(allow_localhost: true)
+# RSpec.configure do |config|
+#   config.before(:each) do
+    
+#     stub_request(:get, "http://api.openweathermap.org/data/2.5/weather?APPID=#{ENV["weather_api"]}&id=6325494&units=metric").
+#       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'api.openweathermap.org', 'User-Agent'=>'Ruby'}).
+#         to_return(:status => 200, :body => "", :headers => {}) 
+        
+#       stub_request(:get, "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/10.json").
+#         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'cdn.rawgit.com', 'User-Agent'=>'Ruby'}).
+#             to_return(:status => 200, :body => "", :headers => {}) 
+            
+#       stub_request(:get, "http://api.icndb.com/jokes/random").
+#          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'api.icndb.com', 'User-Agent'=>'Ruby'}).
+#          to_return(:status => 200, :body => "", :headers => {})
+
+            
+#   end
+# end
+
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
+
+
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
@@ -39,6 +61,7 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
