@@ -107,7 +107,6 @@ end
     end
 
 
-
     # describe "Test de content" do
     #     it "Get the content" do
     #         expect(ElevatorMedia::Streamer.getContent(6325494, 'weatherApi', '10')).to_not eq(nil)
@@ -118,8 +117,8 @@ end
     # end
 
 
-
     RSpec.describe QuotesController, :type => :controller do
+
         describe "GET submission from quote controller" do
             it "get submission and return a successful response" do
                 get :submission
@@ -131,8 +130,6 @@ end
             end
         end
     end
-
-
 
 
     RSpec.describe PagesController, type: :controller do
@@ -215,6 +212,14 @@ end
 
 
     RSpec.describe InterventionsController, type: :controller do
+
+        # context "Intervention is correctly filed and saved" do
+        #     it "redirects_to index" do
+        #         get :create 
+        #         expect(subject).to redirects_to(assigns(:index))
+        #         expect(reponse).to have_http_status(:ok)
+        #     end
+        # end
 
         context 'validation tests for Intervention' do
 
@@ -300,21 +305,8 @@ end
             end
         end
     end
-            # context 'Get building method' do
-            #       it 'returns a success response' do
-            #         get :building
-            #         expect(response).to be_success
-            #     end
-         
-            #     it 'get building method with param' do
-            #         intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
-            #         column_id: 5, elevator_id: 40, employee_id: 5, report: "This is report"  )
-            #             get :building, params: { id: intervention.to_param }
-            #         expect(response).to be_success
-            #     end
-            # end
-  
-RSpec.describe "Routes", :type => :routing do
+    
+    RSpec.describe "Routes", :type => :routing do
 
             it "routes to get the  home page" do
             expect(get: "/home").to route_to("pages#home")
@@ -328,7 +320,6 @@ RSpec.describe "Routes", :type => :routing do
             expect(post: "/root").to route_to("root#sendInformation")
             end
     
-
             it "routes to get the corporate page" do
             expect(get: "/corporate").to route_to("pages#corporate")
             end
@@ -348,33 +339,16 @@ RSpec.describe "Routes", :type => :routing do
             it "routes to get the employee page" do
             expect(get: "/employee").to route_to("pages#employee")
             end
-    
-            it "routes to index " do
-            expect(get: "/index").to route_to("pages#index")
-            end
   
-            it "routes to  user index" do
+            it "routes to user index" do
             expect(get: "/users/index").to route_to("pages#index")
             end
 
-            it "routes to #index" do
+            it "routes to get dashboard" do
             expect(get: "dashboard").to route_to("pages#dashboard")
             end
 
-            it "routes to #index" do
-            expect(get: "dashboard").to route_to("pages#dashboard")
-            end
-
-
-          
-            # post 'interventions' => 'interventions#create'
-            # get 'interventions' => 'interventions#interventions'
-          
-            # get 'interventions/building' => 'interventions#building'
-            # get 'interventions/battery' => 'interventions#battery'
-            # get 'interventions/column' => 'interventions#column'
-            # get 'interventions/elevator' => 'interventions#elevator'
-
+  
     end
 
     
@@ -387,4 +361,5 @@ RSpec.describe "Routes", :type => :routing do
     #          end
     #      end
     #  end
+
 
