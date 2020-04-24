@@ -5,7 +5,9 @@ Week 11 : TDD
 
 
 To run the test in Ruby/Rails : $ bundle exec rspec --format documentation
+
 Path file of the test is : /Rocket-Elevator-Foundation/spec/elevator_media_spec.
+
 Path file of the new content : /Rocket-Elevator-Foundation/lib/elevator_media/streamer.rb
 
 To run the test in C#  -> https://github.com/jomur1414/CSharpTest and run $ cd nunit_codeboxx   AND    $ dotnet test
