@@ -33,7 +33,7 @@ class PagesController < ApplicationController
           department: params[:contact_department],
           message: params[:contact_message],
           file_attachment: file_attachment,
-          file_name:  params[:attached_file].original_filename
+          file_name:  params[:attached_file]
         )
     redirect_to "/index"
   end

@@ -4,7 +4,8 @@
  require 'spec_helper'
  require 'httparty'
  require 'net/http'
-
+ require "rails_helper"
+ 
 
 
 
@@ -16,49 +17,12 @@
   
   
     
-  
-    # Test for Open Weather api
-
-    # context "get something from api" do
-    #     it "should at least return something" do
-    #         expect(ElevatorMedia::Streamer.weatherCity(6325494)).to_not eq(nil)
-    #     end
-    # end
-
-    # context "test for string" do
-    #     it 'return type string' do
-    #         expect(ElevatorMedia::Streamer.getContent(6325494)).to be_a(String)
-    #     end
-    # end
-
-    # context "test for div" do
-    #     it 'should include div' do
-    #     expect(ElevatorMedia::Streamer.getContent(6325494)).to include('<div>')
-    #     end
-    # end
-
-      # context "get Quebec city" do
-    #      it "Should return the city named Québec" do
-    #          expect(ElevatorMedia::Streamer.weatherCity(6325494)['name']).to eq('Québec')
-    #      end
-    #  end
-
-    #  context "get Quebec city" do
-    #     it "Should return the city named Montreal" do
-    #         expect(ElevatorMedia::Streamer.weatherCity(6077243)['name']).to eq('Montreal')
-    #     end
-    # end
-
-    # context "get something from the tempereture" do
-    #     it "should at least return non null value" do
-    #         expect(ElevatorMedia::Streamer.weatherCity(6325494)['main']['temp']).to_not eq(nil)
-    #     end
-    # end
 
 
    # REAL TEST
 
     describe "Get content from the weather API" do
+
         it "Streamer should respond to getContent method" do
 
             expect(ElevatorMedia::Streamer).to respond_to(:getContent)
@@ -79,22 +43,22 @@
         end
 
         it "getContent from apiWeather should be a string" do 
+
             expect(OpenWeather::Current).to receive(:city_id).with(6325494, {:APPID=> ENV['weather_api'], :units=>"metric"}).and_return(FAKE_CONTENT_WEATHER)
             result = ElevatorMedia::Streamer.getContent(6325494, 'weatherApi', '10')
             expect(result).to be_a(String)
         end
 
-        it "should query the weather api information" do
+        it "weatherCity should query the weather api information to be not null, name should equal to Quebec and id should equal to 890" do
             expect(OpenWeather::Current).to receive(:city_id).with(6325494, {:APPID=> ENV['weather_api'], :units=>"metric"}).and_return(FAKE_CONTENT_WEATHER)
             result = ElevatorMedia::Streamer.weatherCity(6325494)
             expect(result).to_not eq(nil)
             expect(result['name']).to eq('Québec') 
             expect(result['sys']['id']).to eq(890)
-         end
-        end
+         end    
 
 
-        it "getContent from apiWeather result should be" do 
+        it "getContent with content_type = 'weatherApi', the result should be equal to" do 
             expect(OpenWeather::Current).to receive(:city_id).with(6325494, {:APPID=> ENV['weather_api'], :units=>"metric"}).and_return(FAKE_CONTENT_WEATHER)
             result = ElevatorMedia::Streamer.getContent(6325494, 'weatherApi', '10')
             expect(result).to eq("<html> <body> <div> 
@@ -103,39 +67,38 @@
         end
 
 
-        it "getContent should call the superHero method" do
-
+        it "getContent with content_type = 'superHeroApi', the result should be equal to" do
             expect(ElevatorMedia::Streamer).to receive(:superHero).with("10") {FAKE_CONTENT_HERO}
             ElevatorMedia::Streamer.getContent(6325494, 'superHeroApi', "10")
-
         end
 
 
-        it "getContent should return HTML inside a string with the Hero name " do
+        it "getContent with content_type = 'superHeroApi' should return HTML inside a string with the Hero name " do
 
-            expect(ElevatorMedia::Streamer).to receive(:superHero).with('10') {FAKE_CONTENT_HERO}
-            result =  ElevatorMedia::Streamer.getContent(6325494, "superHeroApi", '10') {FAKE_CONTENT_HERO}
+            expect(ElevatorMedia::Streamer).to receive(:superHero).with('10').and_return(FAKE_CONTENT_HERO)
+            result =  ElevatorMedia::Streamer.getContent(6325494, "superHeroApi", '10')
             expect(result).to be_a_kind_of(String)
             expect(result).to include("<html> <body> <div>")
             expect(result).to eq("<html> <body> <div> 
         The super hero of the the day is : Agent Bob 
         </div> </body> </html> ")
-
         end
- 
-        it "return HTML inside a string" do
-                expect(OpenWeather::Current).to receive(:city_id).with(6325494, {:units=>"metric", :APPID=> ENV['weather_api']}).and_return(FAKE_CONTENT_WEATHER)
+
+
+        it "getContent with content_type = 'all' should return HTML with all informations" do
                 result = ElevatorMedia::Streamer.getContent(6325494, 'all', '10')
                 expect(result).to be_a_kind_of(String)
                 expect(result).to include("<html> <body> <div>")
                 expect(result).to include("Chuck Norris")
+                expect(result).to include("The super hero of the the day is")
+        
     
         end
     end
-        
+end
 
-    describe "Get superHero method" do
-        it "return a Hero" do
+    describe "The api hero" do
+        it "the method sould receive the url of the api, from this url a JSON, the JSON should not be null and it should content the FAKE_CONTENT_HERO" do
 
         plain_json = double("plain_json")    
         expect(Net::HTTP).to receive(:get).with(URI("https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/10.json")) {plain_json}    
@@ -144,12 +107,14 @@
         expect(result).to_not eq(nil)
         expect(result).to eq(FAKE_CONTENT_HERO)
 
+
+
         end
     end
 
 
-    describe "Get chuck norris" do
-        it "return joke of the day" do
+    describe "The Chuck Nerris API" do
+        it "the method sould receive the url of the api, from this url a JSON, the JSON should not be null and it should content the FAKE_CONTENT_CHUCK" do
 
         plain_json = double("plain_json")    
         expect(Net::HTTP).to receive(:get).with(URI("http://api.icndb.com/jokes/random")) {plain_json}    
@@ -157,9 +122,12 @@
         result = ElevatorMedia::Streamer.chuckNorris(){FAKE_CONTENT_CHUCK}
         expect(result).to_not eq(nil)
         expect(result).to eq(FAKE_CONTENT_CHUCK)
+    
 
         end
     end
+
+
 
     # describe "Test de content" do
     #     it "Get the content" do
@@ -172,14 +140,166 @@
 
 
 
+    RSpec.describe QuotesController, :type => :controller do
+        describe "GET submission from quote controller" do
+            it "get submission and return a successful response" do
+                get :submission
+                expect(response).to be_successful
+            end
+            it "get submission and return 200 status" do
+                get :submission
+                expect(response.status).to eq(200)
+            end
+        end
+    end
 
-#     RSpec.describe InterventionsController, type: :model do
-#         context 'validation tests' do
-#           it 'ensures first name presence' do
-#             user = User.new(last_name: 'Last', email: 'sample@example.com').save
-#             expect(user).to eq(false)
-#           end
-#     end
-# end
+    RSpec.describe PagesController, :type => :controller do
 
 
+        describe "GET index/controller" do
+            it "get index pages  and return a successful response" do
+                get :index
+                expect(response).to be_successful
+            end
+            it "get index pages and return 200 status" do
+                get :index
+                expect(response.status).to eq(200)
+            end
+
+        end
+    end
+
+
+    RSpec.describe PagesController, type: :controller do
+
+    context 'validation tests for Lead' do
+
+        it 'test the full_name param' do
+            lead = Lead.new(full_name: 'Jo').save
+            expect(lead).to eq(true)
+        end
+
+        it 'test the business_name param' do
+            lead = Lead.new(business_name: 'CodeBoxx').save
+            expect(lead).to eq(true)
+        end
+
+        it 'test the email param' do
+            lead = Lead.new(email: 'jonathanmurray1@msn.com').save
+            expect(lead).to eq(true)
+        end
+
+
+        it 'test the phone param' do
+            lead = Lead.new(phone: '555-555-5555').save
+            expect(lead).to eq(true)
+        end
+
+        it 'test the project_name param' do
+            lead = Lead.new(project_name: 'Alpha').save
+            expect(lead).to eq(true)
+        end
+
+
+        end
+    end
+
+    # project_description: params[:contact_project_description],
+    # department: params[:contact_department],
+    # message: params[:contact_message],
+    # file_attachment: file_attachment,
+    # file_name:  params[:attached_file]
+
+
+    RSpec.describe InterventionsController, type: :controller do
+
+        context 'validation tests for Intervention' do
+
+            it 'should return an error (false) id some params are not entered' do
+                intervention = Intervention.new(author_id: 1, customer_id: 2).save
+                expect(intervention).to eq(false)
+            end
+
+            it 'should return an error (false) the parameter customer_id is not entered ' do
+                intervention = Intervention.new(author_id: 1, building_id: 4, battery_id: 10, 
+                column_id: 5, elevator_id: 40, employee_id: 5, report: "This is report"  ).save
+                expect(intervention).to eq(false)
+            end
+
+            it 'should return good (true) without emplotee_id param' do
+                intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
+                column_id: 5, elevator_id: 40, report: "This is report"  ).save
+                expect(intervention).to eq(true)
+            end
+            
+            it 'should return good (true) even without elevator_id, column_id and battery_id ' do
+                intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10,
+                employee_id: 5, report: "This is report").save
+                expect(intervention).to eq(true)
+            end
+            
+            it 'should return good (true) even witouh elevator_id and column_id' do
+                intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
+                employee_id: 5, report: "This is report").save
+                expect(intervention).to eq(true)
+            end
+
+            it 'should return good (true) even witouh elevator_id and column_id and employee_id' do
+                intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
+                report: "This is report").save
+                expect(intervention).to eq(true)
+            end
+
+            it 'should return good (true) if ALL params are there' do
+                intervention = Intervention.new(author_id: 1, customer_id: 2, building_id: 4, battery_id: 10, 
+                column_id: 5, elevator_id: 40, employee_id: 5, report: "This is report"  ).save
+                expect(intervention).to eq(true)
+            end
+
+            end
+        end
+
+
+      
+
+    # RSpec.describe UsersController, type: :controller do
+    #     context 'GET #index' do
+    #       it 'returns a success response' do
+    #         get :index
+    #         expect(response).to be_success # response.success?
+    #       end
+    #     end
+      
+    #     context 'GET #show' do
+    #       it 'returns a success response' do
+    #         lead = Lead.create!(first_name: 'First', last_name: 'Last', email: 'first.last@example.com')
+    #         get :show, params: { id: lead.to_param }
+    #         expect(response).to be_success
+    #       end
+    #     end
+
+
+    #   end
+
+
+    #   RSpec.describe "AdminPanel", :type => :feature do
+    #     context "Go to admin panel" do
+    #         it "Lets me go" do
+    #             visit 'users/sign_in'
+    #             fill_in "Email", with: 'jonathanmurray1@msn.com'
+    #             fill_in "Password", with: '123456'
+    #         end
+    #     end
+    # end
+
+    # RSpec.describe InterventionsController, :type => :controller do
+    #     describe "GET interventions" do
+    #         it "get interventions should return a successful response" do
+    #             get :interventions
+    #             user = double('user')
+    #             allow(request.env['warden']).to receive(:authenticate!) {user}
+    #             allow(controller).to receive(:authenticate!) {use}
+    #             # expect(response).to be_successful
+    #         end
+    #     end
+    # end

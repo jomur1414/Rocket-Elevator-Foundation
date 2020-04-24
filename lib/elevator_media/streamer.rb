@@ -50,8 +50,6 @@ require 'net/http'
         </div> </body> </html> "
 
         end
-
-    
         return information
 
     end
