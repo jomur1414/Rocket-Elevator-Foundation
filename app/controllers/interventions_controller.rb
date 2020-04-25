@@ -1,11 +1,11 @@
 class InterventionsController < ApplicationController
 
 
-    before_action :require_admin, only: :interventions
+   # before_action :require_admin, only: :interventions
     
-    before_action :authenticate_user!, only: [:interventions]
+   # before_action :authenticate_user!, only: [:interventions]
 
-    protect_from_forgery with: :exception
+   # protect_from_forgery with: :exception
 
 
     def interventions
@@ -73,7 +73,7 @@ class InterventionsController < ApplicationController
 #to author_id use current_user_id ?
 
     def create
-        @current_user_id = current_user.id
+        #@current_user_id = current_user.id 
 
         if params[:column] == "None"
             params[:column] = nil
@@ -102,7 +102,7 @@ class InterventionsController < ApplicationController
             
             redirect_to "/interventions"
 
-    zendesk();
+ #   zendesk();
 end
 
 

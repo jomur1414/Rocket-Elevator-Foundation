@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
 
   before_action :authenticate_user!, only: [:dashboard]
-  after_action :sendEmail, :function_send_ticket, only: [:create]
+ # after_action :sendEmail, :function_send_ticket, only: [:create]
   
   protect_from_forgery with: :exception
 
@@ -33,7 +33,7 @@ class PagesController < ApplicationController
           department: params[:contact_department],
           message: params[:contact_message],
           file_attachment: file_attachment,
-          file_name:  params[:attached_file].original_filename
+          file_name:  params[:attached_file]
         )
     redirect_to "/index"
   end

@@ -6,10 +6,12 @@ protect_from_forgery with: :exception
   def submission
 
   end
+
   def create
     
     #Quote.create(params)
     @quote = Quote.new
+    
     @quote = Quote.create(
       firstName: params[:fullName],
       phoneNumber: params[:phoneNumber],

@@ -3,8 +3,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'http'
 
+gem 'httparty', '~> 0.13.7'
+gem 'nokogiri', '~> 1.10', '>= 1.10.9'
 
 ruby '2.6.3'
+
+gem 'webmock', '~> 2.1'
 
 
 gem 'figaro'
@@ -34,7 +38,6 @@ gem "faker"
 
 gem "blazer"
 
-
 gem "font-awesome-rails"
 
 # Use CoffeeScript for .coffee assets and views
@@ -60,9 +63,13 @@ gem "bootsnap", ">= 1.1.0", require: false
 #Bootstrap
 gem "bootstrap", "~> 4.4.1"
 
+
+gem 'rspec', '~> 3.5'
+
+
 #Jquery
 gem "jquery-rails"
-
+gem 'open-weather'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
@@ -75,7 +82,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
+  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
 end
+
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
@@ -83,6 +92,7 @@ group :test do
   gem "selenium-webdriver"
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem "chromedriver-helper"
+  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
