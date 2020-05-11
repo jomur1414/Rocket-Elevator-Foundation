@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   get 'interventions/battery' => 'interventions#battery'
   get 'interventions/column' => 'interventions#column'
   get 'interventions/elevator' => 'interventions#elevator'
-
+  gem 'newrelic_rpm'
   resources :geolocations
 
   
