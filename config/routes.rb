@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   #get 'newintervention' => 'interventions#newintervention'
 
   get 'corporate'  => 'pages#corporate'
+  get 'test'  => 'pages#test'
 
   get 'residential'  => 'pages#residential'
 

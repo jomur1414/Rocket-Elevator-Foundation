@@ -1,0 +1,69 @@
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</div>
+
+<div class="row" style="height: 30vh">
+</div>
+
+<%# 
+    <div class="row">
+			<div class="col-md-6">
+				<p>Total Cost</p>					
+				<div class="container" name="url_display"  id="url_display">
+			</div>
+		</div>
+		 %>
+
+
+
+							<div class="row">
+									<div id="choix" class="col-md-4">
+										<label for="contact_department">Choose a conversation</label>
+										<select id="select_url" class="browser-default custom-select">
+											<option value="">--- Select ---</option>
+											<option value="1">Wav 1</option>
+											<option value="2">Wav 2</option>
+											<option value="3">Wav 3</option>
+										</select>
+									</div>
+								</div>
+
+
+                    <div class="row">
+						<div class="col-md-4">
+							<label for="contact:phone"> Url </label>
+							<input id="url_display"  type="text" value="" class="form-control" name value disabled>
+						</div>
+					</div>
+
+            <a href="#link" class="btn btn-info" role="button">Link Button</a>
+
+<div class="row" style="height: 30vh">
+</div>
+
+<script>
+
+ $("#select_url").change(function () {
+
+    if (this.value == "1")
+    {
+	    choice = "www.google.com";
+	} 
+    if (this.value == "2")
+    {
+        choice = "www.codeboxx.biz";
+    }
+
+    if (this.value == "3")
+    {
+	choice = "www.canada.ca";
+	}
+	
+    $('#url_display').val(choice) ;
+    $('#link').val(choice) ;
+	
+ });
+    </script>
