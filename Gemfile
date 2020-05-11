@@ -115,3 +115,4 @@ gem "brakeman"
 gem 'ibm_watson', git: 'https://github.com/watson-developer-cloud/ruby-sdk', branch: 'master'
 gem 'dropbox_api'
 
+gem 'newrelic_rpm'
