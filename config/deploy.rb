@@ -1,10 +1,11 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.12.0"
 
-before 'deploy', 'rvm1:install:ruby'
+set :rvm_ruby_version, 'ruby-2.6.3'      # Defaults to: 'default'
 set :rvm_map_bins, [ 'rake', 'gem', 'bundle', 'ruby', 'puma', 'pumactl' ]
 set :application, "JonathanMurray"
 set :repo_url, "https://github.com/jomur1414/Rocket-Elevator-Foundation"
+set :rvm_custom_path, '/home/ubuntu/.rvm'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -40,15 +41,15 @@ set :repo_url, "https://github.com/jomur1414/Rocket-Elevator-Foundation"
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-before "deploy:assets:precompile", "deploy:yarn_install"
+# before "deploy:assets:precompile", "deploy:yarn_install"
  
-namespace :deploy do
- desc 'Run rake yarn:install'
- task :yarn_install do
-   on roles(:web) do
-     within release_path do
-       execute("cd #{release_path} && yarn install")
-     end
-   end
- end
-end
+# namespace :deploy do
+#  desc 'Run rake yarn:install'
+#  task :yarn_install do
+#    on roles(:web) do
+#      within release_path do
+#        execute("cd #{release_path} && yarn install")
+#      end
+#    end
+#  end
+# end

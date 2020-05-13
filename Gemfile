@@ -10,7 +10,6 @@ ruby '2.6.3'
 
 gem 'webmock', '~> 2.1'
 
-
 gem 'figaro'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -32,7 +31,6 @@ gem "zendesk_api", git: 'https://github.com/zendesk/zendesk_api_client_rb'
 gem "pg"
 
 gem "devise"
-
 
 gem "faker"
 
@@ -63,9 +61,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 #Bootstrap
 gem "bootstrap", "~> 4.4.1"
 
-
 gem 'rspec', '~> 3.5'
-
 
 #Jquery
 gem "jquery-rails"
@@ -85,7 +81,6 @@ group :development do
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
 end
 
-
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", ">= 2.15"
@@ -101,7 +96,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "capistrano", "~> 3.12", require: false
 gem "capistrano-rails", "~> 1.4", require: false
 gem "capistrano-bundler", ">= 1.1.0"
-gem "rvm1-capistrano3", require: false
+gem 'capistrano-rvm'
 gem "capistrano3-puma"
 
 gem 'devise_zxcvbn'
@@ -116,3 +111,5 @@ gem 'ibm_watson', git: 'https://github.com/watson-developer-cloud/ruby-sdk', bra
 gem 'dropbox_api'
 
 gem 'newrelic_rpm'
+
+gem 'concurrent-ruby', require: 'concurrent'
