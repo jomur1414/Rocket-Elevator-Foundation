@@ -1,101 +1,44 @@
 
 # Rocket_Elevators_Controllers
-Week 11 : TDD
 
+### Features
+```
+- Datawarehouse; 
+- Relational database SQL and postgresql;
+- Interventions form;
+- Admin panel (backoffice);
+- Multiple fully fonctional apis;
+- Rake tasks to fully operate the databases;
+- Fully operational postman collection to test the apis;
+- An "Elevators media streamer" feature for rspec testing;
+- A speech recognition & speech to text API.
+```
 
+### Instructions for testing
+- Login as admin on the page, in the menu click on the "administration" dropdown and select "recognition";
+- Simply browse the tabs on the recognition page for your needs, everything is explaine on the video if clarification is needed.
 
-To run the test in Ruby/Rails : $ bundle exec rspec --format documentation
+### Admin Information
+```
+- Admin panel with email and password
+```
 
-Path file of the test is : /Rocket-Elevator-Foundation/spec/elevator_media_spec.
+### Rspec Information
+- For testing the api requests, simply run the pre-made postmand collection;
+- For testing the rspec examples, use the following command : bundle exec rspec --format documentation
 
-Path file of the new content : /Rocket-Elevator-Foundation/lib/elevator_media/streamer.rb
+- Everything is running on the development environment to ease the usage;
+- After running the specified command in the instructions, an html file will be generated in the /coverage folder of the application (simplecov gem). This file will allow you to see the coverage of the examples tested with rspec (for the whole application). Simply open up the file in your browser.
+- The following are the tested examples :
+``` - Streamer class initialization;
+ - Streamer class receiving the getContent method;
+ - Streamer class responding to the getContent method;
+ - GetContent method is neither nil or false, it contains a string and div tags;
+ - Connecting to the admin panel;
+ - GetContent receives the picture method, weather api, spotify api and pokemon api;
+ - GetContent responds to the picture method, weather api, spotify api and pokemon api;
+ - Fetching the first record from the address, batteries, building_details, buildings, columns, customers, elevators, employees, leads, quotes and users table;
+ - Rendering a pokemon in a view file;
+ - Accessing the interventions page only as admin or employee;
+ - Filling the contact form.
 
-To run the test in C#  -> https://github.com/jomur1414/CSharpTest and run $ cd nunit_codeboxx   AND    $ dotnet test
-
-To run the test in Python ->  https://github.com/jomur1414/PythonTest  and run : $ pytest
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---------------------------------------------------------------------------------------------------
-Week 9 : Foundation
-
-
-
-USER % EMPLOYEE : 
-jonathanmurray1@msn.com // 123456
-or all codeboxx employee email with password 123456
-
-
-USER & CUSTOMER  :
-adam@example.net   // 123456
-
-
-Extra-miles :
-with user account (use adam@exemple.net to try) and go to the dashboard section, you will see all the informations about the quotes the client have made previously,
-a summary of all possessions for the customer (number of building, battery, column and elevator), the leads made previously by the customer
-and also all the interventions where the client is involved
-----------------------------------------------------------------
-
-
-To add an intervention, log with an USER & EMPLOYEE account. You will see Interventions in button section near CONTACTS
-(You can do it on cell phone also)
-
-
-RESTapi foundation repo : https://github.com/jomur1414/RestApiFoundation
------------------------------------------------------------------
-
-Retrieving the informations about interventions
-GET
-https://restapifoundationjm.azurewebsites.net/api/interventions
-
------------------------------------------------------------------
-
-Returns all fields of all Service Request records that do not have a start date and are in "Pending" status.
-GET 
-https://restapifoundationjm.azurewebsites.net/api/interventions/pending
-
------------------------------------------------------------------
-
-Change the status of the intervention request to "InProgress" and add a start date and time (Timestamp).
-
-PUT 
-https://restapifoundationjm.azurewebsites.net/api/interventions/inprogress/{id}
-
-IN THE BODY :
-
-    {
-        "status": "In progress",
-        "intervention_start_time": "2020-02-23T16:47:53"
-    }
-    
-
------------------------------------------------------------------
-
-Change the status of the request for action to "Completed" and add an end date and time (Timestamp).
-
-PUT
-https://restapifoundationjm.azurewebsites.net/api/interventions/completed/{id}
-
-IN THE BODY :
-
-    {
-        "status": "Completed",
-        "intervention_end_time": "2020-03-23T16:47:53"
-    }
-    
-
------------------------------------------------------------------
