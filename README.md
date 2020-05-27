@@ -14,11 +14,3 @@
 - A speech recognition & speech to text API.
 ```
 
-### Instructions for testing
-- Login as admin on the page, in the menu click on the "administration" dropdown and select "recognition";
-- Simply browse the tabs on the recognition page for your needs, everything is explaine on the video if clarification is needed.
-
-### Admin Information
-```
-- Admin panel with email and password
-```
